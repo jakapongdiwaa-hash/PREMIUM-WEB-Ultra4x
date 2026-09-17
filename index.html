@@ -1,937 +1,1727 @@
-<title>คู่มือเว็บห้อง — พรีเมียม</title>
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ULTRA 4X — คู่มือใช้งานเว็บห้อง ฉบับพรีเมียม</title>
+<meta name="description" content="คู่มือใช้งานเว็บห้อง ม.4/8 โรงเรียนสรรพวิทยาคม ฉบับพรีเมียม">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans+Thai:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 
 <style>
-  :root{
-    --ground:#F5F9FF;
-    --paper:#FFFFFF;
-    --ink:#0B1B3A;
-    --body:#33445E;
-    --muted:#7488A6;
-    --line:#E1E9F5;
-    --line-soft:#EEF3FC;
-    --blue:#2563EB;
-    --blue-deep:#123AA6;
-    --cyan:#06B6D4;
-    --cyan-fill:#E4F8FC;
-    --gold:#D89A3B;
-    --rail:#C9D6E8;
-    --danger:#C0453B;
+/* ═══════════════════════════════════════════════════════════════
+   ULTRA 4X — design tokens
+   ═══════════════════════════════════════════════════════════════ */
+:root{
+  --ground:#F2F7FF;
+  --paper:#FFFFFF;
+  --ink:#06122C;
+  --ink-2:#31405E;
+  --muted:#6B7C9B;
+  --line:#DCE6F5;
+  --line-soft:#EDF3FC;
 
-    --f-display:'Chakra Petch',sans-serif;
-    --f-body:'IBM Plex Sans Thai','Segoe UI',sans-serif;
-    --f-mono:'IBM Plex Mono',ui-monospace,monospace;
-  }
+  --blue:#2563EB;
+  --blue-deep:#0B2C86;
+  --cyan:#06B6D4;
+  --cyan-soft:#7DE4F5;
+  --violet:#7C3AED;
+  --gold:#D89A3B;
+  --rose:#F0518A;
 
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
-    margin:0;
-    background:var(--ground);
-    color:var(--body);
-    font-family:var(--f-body);
-    font-size:15.5px;
-    line-height:1.74;
-    -webkit-text-size-adjust:100%;
-  }
+  --stage:#04091A;
+  --stage-2:#0A1738;
 
-  .page{max-width:820px; margin:0 auto; padding:0 24px 100px;}
+  --f-display:'Chakra Petch','IBM Plex Sans Thai',system-ui,sans-serif;
+  --f-body:'IBM Plex Sans Thai',system-ui,sans-serif;
+  --f-mono:'IBM Plex Mono',ui-monospace,monospace;
 
-  /* ================= PREMIUM BADGE STRIP ================= */
-  .premium-strip{
-    background:var(--ink);
-    color:#DCE7FF;
-    font-family:var(--f-mono);
-    font-size:10.5px;
-    letter-spacing:.16em;
-    text-align:center;
-    padding:8px 14px;
-  }
-  .premium-strip b{color:var(--gold); font-weight:500;}
+  --ease:cubic-bezier(.22,1,.36,1);
+  --ease-io:cubic-bezier(.65,.05,.36,1);
 
-  /* ================= HERO ================= */
-  .hero{
-    position:relative;
-    min-height:100svh;
-    display:flex; flex-direction:column; align-items:center; justify-content:center;
-    text-align:center;
-    overflow:hidden;
-    padding:40px 22px;
-    background:
-      radial-gradient(ellipse 60% 40% at 50% 26%, rgba(255,255,255,.95), transparent 72%),
-      linear-gradient(180deg, #D9E9FF 0%, #EAF3FF 44%, var(--ground) 100%);
-  }
-  .hero .grid-overlay{
-    position:absolute; inset:0;
-    background-image:
-      linear-gradient(rgba(37,99,235,.07) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(37,99,235,.07) 1px, transparent 1px);
-    background-size:46px 46px;
-    mask-image:radial-gradient(ellipse 70% 60% at 50% 40%, black 30%, transparent 78%);
-    -webkit-mask-image:radial-gradient(ellipse 70% 60% at 50% 40%, black 30%, transparent 78%);
-  }
-  .hero .cloud{position:absolute; border-radius:50%; filter:blur(48px); opacity:.6; animation:drift 24s ease-in-out infinite;}
-  .hero .c1{width:420px; height:220px; left:-8%;  top:12%; background:#FFFFFF; animation-duration:27s;}
-  .hero .c2{width:520px; height:260px; right:-12%; top:4%;  background:#EAF3FF; animation-duration:32s; animation-delay:-6s;}
-  .hero .c3{width:360px; height:190px; left:16%;  top:56%; background:#FFFFFF; opacity:.7; animation-duration:20s; animation-delay:-3s;}
-  .hero .c4{width:460px; height:230px; right:8%;  top:60%; background:var(--cyan-fill); animation-duration:25s; animation-delay:-11s;}
-  @keyframes drift{0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(3.5%,-4%) scale(1.06);}}
+  --shadow-s:0 1px 2px rgba(6,18,44,.05), 0 4px 14px rgba(6,18,44,.06);
+  --shadow-m:0 14px 40px rgba(6,18,44,.10);
+  --shadow-l:0 30px 80px rgba(6,18,44,.16);
 
-  .hero-body{position:relative; z-index:2;}
-  .premium-tag{
-    display:inline-flex; align-items:center; gap:8px;
-    font-family:var(--f-mono); font-size:11px; font-weight:500; letter-spacing:.18em;
-    text-transform:uppercase; color:var(--blue-deep);
-    background:var(--paper); border:1px solid var(--rail); border-radius:999px;
-    padding:7px 16px 7px 12px; margin:0 0 22px;
-    opacity:0; transform:translateY(10px); animation:riseIn .9s ease .1s forwards;
-  }
-  .premium-tag i{
-    width:6px; height:6px; border-radius:50%; background:var(--gold);
-    box-shadow:0 0 0 3px rgba(216,154,59,.18);
-  }
-  h1{
-    font-family:var(--f-display); font-weight:700;
-    font-size:clamp(34px,7.4vw,58px); line-height:1.08; letter-spacing:-.01em;
-    color:var(--ink); margin:0 0 16px; text-wrap:balance;
-    opacity:0; transform:translateY(18px); animation:riseIn 1s ease .3s forwards;
-  }
-  h1 em{font-style:normal; color:var(--blue);}
-  .standfirst{
-    margin:0 auto 24px; max-width:50ch; color:var(--body); font-size:16.5px;
-    opacity:0; transform:translateY(16px); animation:riseIn 1s ease .52s forwards;
-  }
-  .site-link{
-    display:inline-flex; align-items:center; gap:9px;
-    font-family:var(--f-mono); font-size:12.5px; color:var(--blue);
-    text-decoration:none; border-bottom:1px solid currentColor; padding-bottom:1px;
-    opacity:0; transform:translateY(14px); animation:riseIn 1s ease .72s forwards;
-  }
-  .site-link:hover{color:var(--cyan);}
-  @keyframes riseIn{to{opacity:1; transform:translateY(0);}}
+  --maxw:1180px;
+}
 
-  .scrollcue{
-    position:absolute; left:50%; bottom:30px; transform:translateX(-50%);
-    display:flex; flex-direction:column; align-items:center; gap:10px;
-    font-family:var(--f-display); font-weight:700; font-size:18px;
-    color:var(--ink);
-    opacity:0; animation:riseIn 1s ease 1.05s forwards;
-    transition:opacity .4s ease;
-  }
-  .scrollcue svg{width:19px; height:19px; color:var(--cyan); animation:bob 1.6s ease-in-out infinite;}
-  @keyframes bob{0%,100%{transform:translateY(0);} 50%{transform:translateY(6px);}}
+*,*::before,*::after{box-sizing:border-box;}
 
-  /* ================= AMBIENT SIGNAL TRAIL ================= */
-  #trail{
-    position:fixed; top:0; right:18px; z-index:5;
-    width:3px; height:100vh; pointer-events:none;
-  }
-  @media (max-width:680px){ #trail{right:8px;} }
+html{scroll-behavior:smooth;}
 
-  /* ================= 3D ANATOMY STAGE ================= */
-  .anatomy{padding:70px 0 10px;}
-  .anatomy-head{text-align:center; margin-bottom:26px;}
-  .kicker{
-    display:inline-flex; font-family:var(--f-mono); font-size:11px; font-weight:600;
-    letter-spacing:.2em; text-transform:uppercase; color:var(--cyan); margin:0 0 12px;
-  }
-  h2{
-    font-family:var(--f-display); font-weight:700;
-    font-size:clamp(23px,4.2vw,32px); color:var(--ink); margin:0 0 10px; text-wrap:balance;
-  }
-  .sec-note{margin:0 auto; max-width:52ch; color:var(--muted); font-size:14.5px; text-align:center;}
+body{
+  margin:0;
+  background:var(--ground);
+  color:var(--ink);
+  font-family:var(--f-body);
+  font-weight:400;
+  font-size:16px;
+  line-height:1.72;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
 
-  .stage{
-    position:relative;
-    margin:30px 0 0;
-    aspect-ratio:16/10.5;
-    min-height:380px;
-    border:1px solid var(--line);
-    border-radius:20px;
-    background:
-      radial-gradient(ellipse at 50% 42%, rgba(37,99,235,.08), transparent 58%),
-      var(--paper);
-    overflow:hidden;
-    cursor:crosshair;
-    box-shadow:0 20px 50px rgba(11,27,58,.06);
-  }
-  .stage canvas{display:block; width:100%; height:100%;}
-  .stage .fallback{
-    position:absolute; inset:0; display:none; align-items:center; justify-content:center;
-    text-align:center; padding:34px; color:var(--muted); font-family:var(--f-mono); font-size:12px; line-height:1.9;
-  }
-  .stage .loading{
-    position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;
-    gap:14px; font-family:var(--f-mono); font-size:11px; letter-spacing:.16em; color:var(--muted);
-    background:var(--paper); transition:opacity .45s;
-  }
-  .stage .loading .bar{width:min(200px,44vw); height:2px; background:var(--line-soft); overflow:hidden;}
-  .stage .loading .bar i{display:block; width:40%; height:100%; background:var(--blue); animation:sweep 1.15s ease-in-out infinite;}
-  @keyframes sweep{0%{transform:translateX(-110%);} 100%{transform:translateX(320%);}}
-  .three-ready .loading, .three-failed .loading{opacity:0; pointer-events:none;}
-  .tag{
-    position:absolute; pointer-events:none; white-space:nowrap; padding:6px 11px;
-    background:rgba(255,255,255,.96); border:1px solid var(--line); border-left:3px solid var(--rail);
-    border-radius:4px; opacity:0; transform:translate(0,-50%);
-    transition:opacity .25s, border-color .2s;
-    box-shadow:0 6px 16px rgba(11,27,58,.08);
-  }
-  .tag b{display:block; font-family:var(--f-display); font-weight:600; font-size:13px; color:var(--ink);}
-  .tag i{display:block; font-style:normal; font-family:var(--f-mono); font-size:9.5px; letter-spacing:.08em; color:var(--muted);}
-  .tag.show{opacity:1;}
-  .tag.hot{border-left-color:var(--blue); box-shadow:0 10px 24px rgba(37,99,235,.16);}
-  .tag.hot b{color:var(--blue);}
+/* ── film grain over everything ─────────────────────────────── */
+.grain{
+  position:fixed; inset:-120px;
+  pointer-events:none; z-index:9000;
+  opacity:.36; mix-blend-mode:multiply;
+  background-image:var(--grain-url);
+  background-size:180px 180px;
+  animation:grainShift 700ms steps(6) infinite;
+}
+@keyframes grainShift{
+  0%{transform:translate(0,0);}      16%{transform:translate(-14px,7px);}
+  33%{transform:translate(9px,-11px);} 50%{transform:translate(-6px,12px);}
+  66%{transform:translate(13px,5px);}  83%{transform:translate(-11px,-8px);}
+  100%{transform:translate(0,0);}
+}
 
-  .anatomy-list{
-    display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px;
-    margin-top:18px;
-  }
-  .anatomy-list button{
-    font-family:var(--f-display); font-weight:600; font-size:13.5px; color:var(--ink);
-    background:var(--paper); border:1px solid var(--line); border-radius:10px;
-    padding:11px 13px; text-align:left; cursor:pointer;
-    transition:border-color .2s, color .2s, transform .3s cubic-bezier(.22,1,.36,1), box-shadow .3s;
-  }
-  .anatomy-list button small{display:block; font-family:var(--f-body); font-weight:400; font-size:12px; color:var(--muted); margin-top:3px;}
-  .anatomy-list button:hover, .anatomy-list button.hot{
-    border-color:var(--blue); color:var(--blue); transform:translateY(-2px);
-    box-shadow:0 10px 22px rgba(37,99,235,.12);
-  }
+/* ── scroll progress ───────────────────────────────────────── */
+.progress{
+  position:fixed; top:0; left:0; height:3px; width:100%;
+  transform:scaleX(0); transform-origin:0 50%;
+  background:linear-gradient(90deg,var(--cyan),var(--blue) 55%,var(--violet));
+  z-index:8000; will-change:transform;
+  box-shadow:0 0 14px rgba(37,99,235,.55);
+}
 
-  /* ================= jump pills ================= */
-  .jumpbar{max-width:820px; margin:0 auto; padding:36px 24px 0;}
-  .jump{display:flex; flex-wrap:wrap; justify-content:center; gap:10px;}
-  .jump a{
-    font-family:var(--f-display); font-size:13.5px; font-weight:600; color:var(--ink);
-    background:var(--paper); border:1px solid var(--line); border-radius:999px; padding:9px 18px;
-    text-decoration:none; transform-origin:50% 50%;
-    transition:transform .4s cubic-bezier(.22,1,.36,1), opacity .3s ease, border-color .25s ease, color .25s ease, box-shadow .3s ease;
-  }
-  .jump:hover a{opacity:.5; transform:scale(.93);}
-  .jump a:hover, .jump a:focus-visible{
-    opacity:1 !important; transform:scale(1.12) !important;
-    border-color:var(--blue); color:var(--blue);
-    box-shadow:0 10px 22px rgba(37,99,235,.14); z-index:2; position:relative;
-    outline:none;
-  }
+/* ── custom cursor ─────────────────────────────────────────── */
+.cur-dot, .cur-ring{
+  position:fixed; top:0; left:0; pointer-events:none; z-index:8600;
+  border-radius:999px; will-change:transform; opacity:0;
+  transition:opacity .35s;
+}
+.cur-dot{
+  width:7px; height:7px; margin:-3.5px 0 0 -3.5px;
+  background:var(--blue);
+}
+.cur-ring{
+  width:38px; height:38px; margin:-19px 0 0 -19px;
+  border:1.5px solid rgba(37,99,235,.45);
+  transition:opacity .35s, width .3s var(--ease), height .3s var(--ease),
+             margin .3s var(--ease), border-color .3s, background .3s;
+}
+body.cursor-on .cur-dot, body.cursor-on .cur-ring{opacity:1;}
+body.cursor-hot .cur-ring{
+  width:64px; height:64px; margin:-32px 0 0 -32px;
+  border-color:rgba(6,182,212,.7);
+  background:rgba(6,182,212,.08);
+}
 
-  /* ================= sections ================= */
-  section.doc{padding-top:64px;}
-  .sec-head{display:flex; align-items:baseline; gap:13px; margin-bottom:6px;}
-  .sec-tag{
-    font-family:var(--f-mono); font-size:11px; font-weight:600; letter-spacing:.14em;
-    color:var(--blue-deep); background:var(--cyan-fill); border-radius:4px; padding:3px 8px; white-space:nowrap;
-  }
-  section.doc h2{text-align:left; margin:0;}
-  section.doc .sec-note{text-align:left; margin:0 0 26px; max-width:60ch;}
+/* ═══════════════ PRELOADER ═══════════════ */
+.preload{
+  position:fixed; inset:0; z-index:9500;
+  background:var(--ground);
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:26px;
+  transition:opacity .8s var(--ease), visibility .8s;
+}
+.preload.done{opacity:0; visibility:hidden;}
+.pl-mark{width:74px; height:74px;}
+.pl-mark path, .pl-mark circle{
+  fill:none; stroke:var(--blue); stroke-width:2.2;
+  stroke-linecap:round; stroke-linejoin:round;
+  stroke-dasharray:var(--len,300); stroke-dashoffset:var(--len,300);
+  animation:drawMark 1.5s var(--ease) forwards;
+}
+.pl-mark circle{stroke:var(--cyan); animation-delay:.25s;}
+@keyframes drawMark{to{stroke-dashoffset:0;}}
+.pl-num{
+  font-family:var(--f-mono); font-size:13px; font-weight:500;
+  letter-spacing:.34em; color:var(--muted);
+}
+.pl-bar{width:min(240px,50vw); height:2px; background:var(--line); overflow:hidden; border-radius:2px;}
+.pl-bar i{
+  display:block; height:100%; width:0%;
+  background:linear-gradient(90deg,var(--cyan),var(--blue));
+}
 
-  h3{font-family:var(--f-display); font-weight:600; font-size:17.5px; color:var(--ink); margin:38px 0 16px;}
-  h3:first-of-type{margin-top:28px;}
+/* ═══════════════ SHELL ═══════════════ */
+.wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px;}
 
-  /* feature board: hover to separate, hover a chip to zoom */
-  .board{position:relative; background:var(--paper); border:1px solid var(--line); border-radius:16px; padding:22px 18px 20px; outline:none;}
-  .board-eyebrow{display:block; font-family:var(--f-mono); font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin:0 0 14px;}
-  .chips{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px 10px;}
-  .chip{
-    position:relative; background:var(--ground); border:1px solid var(--line); border-radius:10px;
-    padding:12px 13px 13px; cursor:pointer; outline:none; transform-origin:50% 60%;
-    transition:transform .5s cubic-bezier(.22,1,.36,1), opacity .35s ease, box-shadow .4s ease, border-color .3s ease, background .3s ease;
-  }
-  .chip p{margin:0; font-family:var(--f-display); font-weight:600; font-size:14px; color:var(--ink);}
-  .chip .detail{
-    display:block; margin-top:6px; font-family:var(--f-body); font-weight:400; font-size:12.5px; line-height:1.55;
-    color:var(--muted); max-height:0; overflow:hidden; opacity:0; transition:max-height .4s ease, opacity .3s ease .05s;
-  }
-  .board:hover .chip, .board.is-open .chip{box-shadow:0 8px 18px rgba(11,27,58,.08); border-color:var(--rail); background:var(--paper);}
-  .chips:hover .chip{opacity:.45; transform:scale(.97);}
-  .chips .chip:hover, .chip:focus-visible, .chip.is-zoom{
-    opacity:1 !important; transform:scale(1.06) !important; border-color:var(--blue);
-    box-shadow:0 16px 34px rgba(37,99,235,.16); z-index:2;
-  }
-  .chips .chip:hover .detail, .chip:focus-visible .detail, .chip.is-zoom .detail{max-height:120px; opacity:1;}
+/* ── top status bar ────────────────────────────────────────── */
+.topbar{
+  position:fixed; top:0; left:0; right:0; z-index:7000;
+  display:flex; align-items:center; justify-content:space-between; gap:18px;
+  padding:14px 28px;
+  font-family:var(--f-mono); font-size:11px; letter-spacing:.14em;
+  color:var(--muted);
+  background:rgba(242,247,255,.72);
+  backdrop-filter:saturate(180%) blur(18px);
+  -webkit-backdrop-filter:saturate(180%) blur(18px);
+  border-bottom:1px solid transparent;
+  transition:border-color .4s, background .4s;
+}
+.topbar.solid{border-bottom-color:var(--line); background:rgba(242,247,255,.9);}
+.topbar b{color:var(--ink); font-weight:600;}
+.tb-dot{
+  display:inline-block; width:6px; height:6px; border-radius:999px;
+  background:var(--cyan); margin-right:7px; vertical-align:1px;
+  box-shadow:0 0 0 0 rgba(6,182,212,.6); animation:ping 2.4s ease-out infinite;
+}
+@keyframes ping{
+  0%{box-shadow:0 0 0 0 rgba(6,182,212,.6);}
+  70%{box-shadow:0 0 0 9px rgba(6,182,212,0);}
+  100%{box-shadow:0 0 0 0 rgba(6,182,212,0);}
+}
+.tb-right{display:flex; gap:20px; align-items:center;}
+.tb-right span:nth-child(2){display:none;}
+@media(min-width:760px){ .tb-right span:nth-child(2){display:inline;} }
 
-  ol.steps{list-style:none; margin:0; padding:0; display:grid; gap:0; counter-reset:step;}
-  ol.steps > li{counter-increment:step; position:relative; padding:0 0 20px 46px; border-left:1px solid var(--rail); margin-left:13px;}
-  ol.steps > li:last-child{border-left-color:transparent; padding-bottom:0;}
-  ol.steps > li::before{
-    content:counter(step); position:absolute; left:-13px; top:1px; width:26px; height:26px; border-radius:50%;
-    background:var(--paper); border:1px solid var(--rail); color:var(--blue); font-family:var(--f-mono);
-    font-size:11.5px; font-weight:600; display:flex; align-items:center; justify-content:center;
-  }
-  ol.steps p{margin:0;} ol.steps p + p{margin-top:4px;}
-  .why{color:var(--muted); font-size:13.5px;}
+/* ═══════════════ HERO ═══════════════ */
+.hero{
+  position:relative; min-height:100svh;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  text-align:center; padding:120px 28px 90px;
+  overflow:hidden;
+}
+#aurora{
+  position:absolute; inset:0; width:100%; height:100%;
+  z-index:0; display:block;
+}
+.hero-grid{
+  position:absolute; inset:0; z-index:1; pointer-events:none;
+  background:
+    linear-gradient(rgba(37,99,235,.055) 1px, transparent 1px) 0 0/54px 54px,
+    linear-gradient(90deg, rgba(37,99,235,.055) 1px, transparent 1px) 0 0/54px 54px;
+  mask-image:radial-gradient(ellipse 80% 65% at 50% 45%, #000 30%, transparent 78%);
+  -webkit-mask-image:radial-gradient(ellipse 80% 65% at 50% 45%, #000 30%, transparent 78%);
+}
+.hero-inner{position:relative; z-index:3; width:100%; max-width:960px;}
 
-  ul.plain{list-style:none; margin:0; padding:0; display:grid; gap:13px;}
-  ul.plain > li{padding-left:20px; position:relative;}
-  ul.plain > li::before{content:""; position:absolute; left:2px; top:11px; width:6px; height:6px; border-radius:50%; background:var(--rail);}
+.eyebrow{
+  display:inline-flex; align-items:center; gap:10px;
+  font-family:var(--f-mono); font-size:11px; font-weight:500; letter-spacing:.22em;
+  text-transform:uppercase; color:var(--blue-deep);
+  background:rgba(255,255,255,.82); border:1px solid var(--line);
+  padding:8px 18px; border-radius:999px; margin:0 0 30px;
+  backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+  box-shadow:var(--shadow-s);
+}
+.eyebrow i{
+  width:7px; height:7px; border-radius:999px; background:var(--gold);
+  box-shadow:0 0 10px var(--gold);
+}
 
-  b.ui{
-    font-family:var(--f-display); font-weight:600; color:var(--ink); background:var(--line-soft);
-    border:1px solid var(--line); border-radius:6px; padding:1px 7px; font-size:.93em; white-space:nowrap;
-  }
-  code{font-family:var(--f-mono); font-size:.87em; color:var(--blue-deep); background:var(--cyan-fill); border-radius:4px; padding:1px 6px; word-break:break-all;}
-  strong{color:var(--ink); font-weight:600;}
+h1.mega{
+  font-family:var(--f-display); font-weight:700;
+  font-size:clamp(40px, 8.2vw, 104px);
+  line-height:1.04; letter-spacing:-.02em;
+  margin:0 0 4px; color:var(--ink);
+  text-wrap:balance;
+}
+h1.mega .shine{
+  position:relative; display:inline-block;
+  background:linear-gradient(100deg,
+    var(--blue-deep) 0%, var(--blue) 26%, var(--cyan) 42%,
+    #BDE9FA 50%, var(--cyan) 58%, var(--blue) 74%, var(--blue-deep) 100%);
+  background-size:280% 100%;
+  -webkit-background-clip:text; background-clip:text;
+  color:transparent;
+  animation:shineSweep 6.5s linear infinite;
+}
+@keyframes shineSweep{
+  0%{background-position:170% 0;}
+  100%{background-position:-170% 0;}
+}
+.hero-sub{
+  font-size:clamp(15px,1.7vw,19px); color:var(--ink-2); font-weight:300;
+  max-width:52ch; margin:22px auto 0; line-height:1.78;
+  text-wrap:balance;
+}
 
-  .legend{display:grid; grid-template-columns:repeat(auto-fit,minmax(158px,1fr)); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:10px; overflow:hidden; margin:18px 0 0;}
-  .legend div{background:var(--paper); padding:14px 16px;}
-  .legend dt{font-family:var(--f-display); font-weight:600; font-size:14.5px; color:var(--ink); margin:0 0 2px;}
-  .legend dd{margin:0; font-size:13px; color:var(--muted); line-height:1.55;}
-  .swatch{display:inline-block; width:8px; height:8px; border-radius:2px; margin-right:7px; vertical-align:1px;}
+.hero-cta{display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-top:40px;}
+.btn{
+  position:relative; display:inline-flex; align-items:center; gap:10px;
+  font-family:var(--f-display); font-weight:600; font-size:14.5px;
+  padding:14px 30px; border-radius:999px; border:1px solid var(--line);
+  background:var(--paper); color:var(--ink); text-decoration:none;
+  cursor:pointer; overflow:hidden; isolation:isolate;
+  box-shadow:var(--shadow-s);
+  transition:transform .45s var(--ease), box-shadow .45s var(--ease), border-color .3s, color .3s;
+  will-change:transform;
+}
+.btn::before{
+  content:''; position:absolute; inset:0; z-index:-1;
+  background:linear-gradient(120deg,var(--blue),var(--cyan));
+  transform:translateY(101%); transition:transform .5s var(--ease);
+}
+.btn:hover{color:#fff; border-color:transparent; box-shadow:0 18px 40px rgba(37,99,235,.3);}
+.btn:hover::before{transform:translateY(0);}
+.btn.solid{
+  background:linear-gradient(120deg,var(--blue-deep),var(--blue));
+  color:#fff; border-color:transparent;
+  box-shadow:0 14px 34px rgba(37,99,235,.32);
+}
+.btn.solid::before{background:linear-gradient(120deg,var(--cyan),var(--blue));}
+.btn svg{width:15px; height:15px; flex:0 0 auto;}
 
-  .note{border-left:3px solid var(--gold); background:#FBF3E4; padding:15px 18px; margin:22px 0 0; border-radius:0 8px 8px 0; font-size:14.5px;}
-  .note p{margin:0;} .note p + p{margin-top:9px;}
-  .note .label{display:block; font-family:var(--f-mono); font-size:10.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:#9A6A1E; margin-bottom:5px;}
+.scrollcue{
+  position:absolute; left:50%; bottom:34px; transform:translateX(-50%);
+  z-index:3; display:flex; flex-direction:column; align-items:center; gap:9px;
+  font-family:var(--f-display); font-weight:600; font-size:12.5px;
+  letter-spacing:.08em; color:var(--ink-2);
+}
+.scrollcue .rail{
+  width:1px; height:44px; background:linear-gradient(var(--blue),transparent);
+  position:relative; overflow:hidden;
+}
+.scrollcue .rail::after{
+  content:''; position:absolute; left:-1px; width:3px; height:14px; border-radius:2px;
+  background:var(--cyan); box-shadow:0 0 8px var(--cyan);
+  animation:railRun 1.9s var(--ease-io) infinite;
+}
+@keyframes railRun{
+  0%{transform:translateY(-16px); opacity:0;}
+  30%{opacity:1;} 75%{opacity:1;}
+  100%{transform:translateY(46px); opacity:0;}
+}
 
-  .admin{background:var(--paper); border:1px solid var(--line); border-radius:14px; padding:26px 24px 28px; margin-top:34px;}
-  .admin h3{margin-top:0;} .admin h3 + p{margin-top:-6px;}
-  .fmt{font-family:var(--f-mono); font-size:12.5px; line-height:1.9; color:var(--ink); background:var(--ground); border:1px solid var(--line); border-radius:8px; padding:13px 15px; margin:12px 0 0; overflow-x:auto; white-space:pre;}
+/* ═══════════════ MARQUEE ═══════════════ */
+.marquee{
+  position:relative; overflow:hidden; padding:17px 0;
+  border-block:1px solid var(--line);
+  background:var(--paper);
+  mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);
+}
+.mq-track{display:flex; width:max-content; animation:mqRun 26s linear infinite;}
+.mq-track span{
+  font-family:var(--f-display); font-weight:600; font-size:14px;
+  letter-spacing:.12em; color:var(--ink-2); white-space:nowrap;
+  padding:0 26px; display:inline-flex; align-items:center; gap:26px;
+}
+.mq-track span::after{
+  content:''; width:6px; height:6px; border-radius:999px;
+  background:var(--cyan); flex:0 0 auto;
+}
+@keyframes mqRun{to{transform:translateX(-50%);}}
+.marquee:hover .mq-track{animation-play-state:paused;}
 
-  .fix{border-top:1px solid var(--line); padding:20px 0 0; margin-top:20px;}
-  .fix:first-of-type{border-top:none; padding-top:0; margin-top:22px;}
-  .fix h4{font-family:var(--f-display); font-weight:600; font-size:15.5px; color:var(--ink); margin:0 0 4px;}
-  .fix p{margin:0;}
+/* ═══════════════ SECTIONS ═══════════════ */
+section.blk{padding:100px 0;}
+.sec-head{margin-bottom:46px; max-width:64ch;}
+.sec-tag{
+  display:inline-block; font-family:var(--f-mono); font-size:10.5px; font-weight:600;
+  letter-spacing:.2em; text-transform:uppercase;
+  color:var(--blue-deep); background:rgba(6,182,212,.1);
+  border:1px solid rgba(6,182,212,.22);
+  padding:5px 12px; border-radius:5px; margin-bottom:16px;
+}
+h2.sec{
+  font-family:var(--f-display); font-weight:700;
+  font-size:clamp(27px,4.3vw,46px); line-height:1.16; letter-spacing:-.015em;
+  margin:0 0 14px; color:var(--ink); text-wrap:balance;
+}
+.sec-note{
+  font-size:16px; color:var(--ink-2); font-weight:300; margin:0; max-width:58ch;
+  line-height:1.8;
+}
 
-  footer{margin-top:64px; padding-top:24px; border-top:1px solid var(--line); color:var(--muted); font-size:13px;}
+/* ── reveal on scroll ──────────────────────────────────────── */
+.rv{opacity:0; transform:translateY(34px); transition:opacity .9s var(--ease), transform .9s var(--ease);}
+.rv.in{opacity:1; transform:none;}
+.rv-stagger > *{opacity:0; transform:translateY(26px); transition:opacity .8s var(--ease), transform .8s var(--ease);}
+.rv-stagger.in > *{opacity:1; transform:none;}
+.rv-stagger.in > *:nth-child(1){transition-delay:.04s}
+.rv-stagger.in > *:nth-child(2){transition-delay:.12s}
+.rv-stagger.in > *:nth-child(3){transition-delay:.20s}
+.rv-stagger.in > *:nth-child(4){transition-delay:.28s}
+.rv-stagger.in > *:nth-child(5){transition-delay:.36s}
+.rv-stagger.in > *:nth-child(6){transition-delay:.44s}
 
-  @media (max-width:520px){
-    body{font-size:15px;}
-    .page{padding:0 18px 80px;}
-    ol.steps > li{padding-left:38px;}
-  }
-  @media (prefers-reduced-motion:reduce){
-    .chip, .jump a, .anatomy-list button{transition:none;}
-    .hero .cloud{animation:none;}
-    .scrollcue svg{animation:none;}
-  }
+/* ═══════════════ STATS ═══════════════ */
+.stats{
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(168px,1fr));
+  gap:1px; background:var(--line);
+  border:1px solid var(--line); border-radius:18px; overflow:hidden;
+  box-shadow:var(--shadow-s);
+}
+.stat{background:var(--paper); padding:30px 24px; text-align:center; position:relative;}
+.stat .n{
+  font-family:var(--f-display); font-weight:700;
+  font-size:clamp(32px,4.6vw,50px); line-height:1; color:var(--ink);
+  display:block; letter-spacing:-.02em;
+  font-variant-numeric:tabular-nums;
+}
+.stat .n em{font-style:normal; color:var(--cyan); font-size:.6em; margin-left:2px;}
+.stat .l{
+  display:block; margin-top:10px;
+  font-family:var(--f-mono); font-size:10.5px; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--muted);
+}
+.stat::after{
+  content:''; position:absolute; left:50%; bottom:0; width:0; height:2px;
+  background:linear-gradient(90deg,var(--cyan),var(--blue));
+  transform:translateX(-50%); transition:width .6s var(--ease);
+}
+.stat:hover::after{width:64%;}
 
-  /* ==========================================================================
-     AMBIENT DECORATIVE LAYER (CIRCUIT GLOW & FLOATING HEARTS)
-     Purely additive — pointer-events:none, negative z-index so it always
-     paints behind every normal page element.
-     ========================================================================== */
-  .ambient-circuit-canvas{
-    position:fixed; inset:0;
-    pointer-events:none !important;
-    z-index:-2;
-    overflow:hidden;
-  }
-  .ambient-circuit-line{
-    position:absolute;
-    background:rgba(37,99,235,.08);
-    pointer-events:none !important;
-  }
-  .ambient-circuit-line.h1{top:12%; left:0; width:100%; height:1px;}
-  .ambient-circuit-line.h2{top:38%; left:0; width:100%; height:1px;}
-  .ambient-circuit-line.h3{top:64%; left:0; width:100%; height:1px;}
-  .ambient-circuit-line.h4{top:88%; left:0; width:100%; height:1px;}
-  .ambient-circuit-line.v1{left:8%; top:0; width:1px; height:100%;}
-  .ambient-circuit-line.v2{left:38%; top:0; width:1px; height:100%;}
-  .ambient-circuit-line.v3{right:38%; top:0; width:1px; height:100%;}
-  .ambient-circuit-line.v4{right:8%; top:0; width:1px; height:100%;}
-  .ambient-circuit-pulse{
-    position:absolute;
-    border-radius:999px;
-    pointer-events:none !important;
-    filter:drop-shadow(0 0 5px var(--cyan)) drop-shadow(0 0 10px rgba(37,99,235,.7));
-  }
-  .ambient-circuit-pulse.pha{
-    top:-1px; left:0; width:120px; height:3px;
-    background:linear-gradient(90deg, transparent, var(--cyan) 60%, var(--blue) 85%, transparent);
-    animation:ambCircuitH 6s linear infinite;
-  }
-  .ambient-circuit-pulse.phb{
-    top:-1px; right:0; width:130px; height:3px;
-    background:linear-gradient(90deg, transparent, var(--blue) 25%, var(--cyan) 65%, transparent);
-    animation:ambCircuitHR 7s linear infinite;
-  }
-  .ambient-circuit-pulse.pva{
-    left:-1px; top:0; width:3px; height:120px;
-    background:linear-gradient(180deg, transparent, var(--cyan) 60%, var(--blue) 85%, transparent);
-    animation:ambCircuitV 6.5s linear infinite;
-  }
-  .ambient-circuit-pulse.pvb{
-    left:-1px; bottom:0; width:3px; height:120px;
-    background:linear-gradient(180deg, transparent, var(--blue) 25%, var(--cyan) 65%, transparent);
-    animation:ambCircuitVR 7.5s linear infinite;
-  }
-  .ambient-circuit-line.h1 .ambient-circuit-pulse{animation-delay:0s;}
-  .ambient-circuit-line.h2 .ambient-circuit-pulse{animation-delay:-1.6s;}
-  .ambient-circuit-line.h3 .ambient-circuit-pulse{animation-delay:-3.2s;}
-  .ambient-circuit-line.h4 .ambient-circuit-pulse{animation-delay:-4.8s;}
-  .ambient-circuit-line.v1 .ambient-circuit-pulse{animation-delay:0s;}
-  .ambient-circuit-line.v2 .ambient-circuit-pulse{animation-delay:-1.8s;}
-  .ambient-circuit-line.v3 .ambient-circuit-pulse{animation-delay:-3.6s;}
-  .ambient-circuit-line.v4 .ambient-circuit-pulse{animation-delay:-5.4s;}
-  @keyframes ambCircuitH{
-    0%{transform:translateX(-130px); opacity:0;}
-    10%{opacity:.85;} 90%{opacity:.85;}
-    100%{transform:translateX(calc(100vw + 130px)); opacity:0;}
-  }
-  @keyframes ambCircuitHR{
-    0%{transform:translateX(140px); opacity:0;}
-    10%{opacity:.8;} 90%{opacity:.8;}
-    100%{transform:translateX(calc(-100vw - 140px)); opacity:0;}
-  }
-  @keyframes ambCircuitV{
-    0%{transform:translateY(-130px); opacity:0;}
-    10%{opacity:.8;} 90%{opacity:.8;}
-    100%{transform:translateY(calc(100vh + 130px)); opacity:0;}
-  }
-  @keyframes ambCircuitVR{
-    0%{transform:translateY(140px); opacity:0;}
-    10%{opacity:.75;} 90%{opacity:.75;}
-    100%{transform:translateY(calc(-100vh - 140px)); opacity:0;}
-  }
+/* ═══════════════ HOLOGRAM STAGE (CSS 3D) ═══════════════ */
+.stage-wrap{
+  position:relative; border-radius:26px; overflow:hidden;
+  background:
+    radial-gradient(ellipse 70% 55% at 50% 84%, rgba(37,99,235,.30), transparent 62%),
+    radial-gradient(ellipse 50% 40% at 18% 12%, rgba(6,182,212,.18), transparent 60%),
+    linear-gradient(175deg,var(--stage-2),var(--stage));
+  border:1px solid rgba(125,228,245,.14);
+  box-shadow:var(--shadow-l);
+}
+.stage-wrap::before{  /* scanlines */
+  content:''; position:absolute; inset:0; z-index:4; pointer-events:none; opacity:.4;
+  background:repeating-linear-gradient(180deg, rgba(190,240,255,.05) 0 1px, transparent 1px 4px);
+}
+.stage-wrap::after{  /* vignette */
+  content:''; position:absolute; inset:0; z-index:5; pointer-events:none;
+  background:radial-gradient(ellipse 78% 72% at 50% 50%, transparent 52%, rgba(2,6,18,.55));
+}
+.stage{
+  position:relative; z-index:2;
+  height:min(52vh, 440px); min-height:352px;
+  perspective:1400px; perspective-origin:50% 44%;
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer; outline:none;
+}
+.deck{
+  position:relative; transform-style:preserve-3d;
+  transform:rotateX(64deg) rotateZ(0deg);
+  transition:transform 1.1s var(--ease);
+  width:300px; height:200px;
+}
+.stage.open .deck{transform:rotateX(16deg) rotateZ(0deg);}
 
-  #ambient-hearts-layer{
-    position:fixed; inset:0;
-    pointer-events:none !important;
-    z-index:-1;
-    overflow:hidden;
-  }
-  .ambient-heart-item{
-    position:absolute;
-    bottom:-40px;
-    user-select:none;
-    pointer-events:none !important;
-    will-change:transform, opacity;
-    animation-name:ambHeartFloat;
-    animation-timing-function:cubic-bezier(.25,.46,.45,.94);
-    animation-fill-mode:forwards;
-  }
-  /* Bigger hearts that sway left/right on the way up (a few tilts each
-     direction) but always net upward and end fully faded at the top. */
-  @keyframes ambHeartFloat{
-    0%{   transform:translateY(0)      translateX(0)                                   rotate(0deg)                     scale(.6);  opacity:0;   filter:hue-rotate(0deg);}
-    10%{  opacity:.85; }
-    22%{  transform:translateY(-22vh)  translateX(calc(var(--sway,26px) * -1))         rotate(calc(var(--rot,16deg) * -1)) scale(1);   }
-    40%{  transform:translateY(-42vh)  translateX(var(--sway,26px))                    rotate(var(--rot,16deg))            scale(1.02);}
-    58%{  transform:translateY(-62vh)  translateX(calc(var(--sway,26px) * -.7))        rotate(calc(var(--rot,16deg) * -.7));  opacity:.7; }
-    76%{  transform:translateY(-82vh)  translateX(calc(var(--drift,14px) + var(--sway,26px) * .4)) rotate(calc(var(--rot,16deg) * .4)); opacity:.5; filter:hue-rotate(30deg); }
-    100%{ transform:translateY(-108vh) translateX(var(--drift,14px))                   rotate(calc(var(--rot,16deg) * .2)); scale(.55); opacity:0;   filter:hue-rotate(60deg); }
-  }
+/* closed book */
+.book{
+  position:absolute; inset:0; transform-style:preserve-3d;
+  transition:opacity .7s var(--ease), transform 1.1s var(--ease);
+}
+.stage.open .book{opacity:.42; transform:translateZ(-10px) scale(.94);}
+.book .cover{
+  position:absolute; inset:0; border-radius:8px;
+  background:linear-gradient(140deg,#123A9E,#0A1E5C 60%,#081642);
+  border:1px solid rgba(125,228,245,.42);
+  box-shadow:0 0 0 1px rgba(2,8,24,.6), 0 30px 60px rgba(0,0,0,.55),
+             inset 0 1px 0 rgba(190,240,255,.24);
+}
+.book .cover::after{
+  content:''; position:absolute; inset:12px; border-radius:4px;
+  border:1px solid rgba(125,228,245,.3);
+}
+.book .spine{
+  position:absolute; left:-5px; top:0; bottom:0; width:10px; border-radius:3px;
+  background:linear-gradient(90deg,#061334,#0E2A74);
+  transform:translateZ(-5px);
+}
+.book .glyph{
+  position:absolute; left:50%; top:50%; transform:translate(-50%,-50%) translateZ(2px);
+  font-family:var(--f-mono); font-size:11px; letter-spacing:.3em;
+  color:rgba(190,240,255,.85); white-space:nowrap;
+  text-shadow:0 0 12px rgba(125,228,245,.8);
+}
 
-  @media (prefers-reduced-motion:reduce){
-    .ambient-circuit-canvas, #ambient-hearts-layer{display:none !important;}
-    .ambient-circuit-pulse, .ambient-heart-item{animation:none !important;}
+/* projector floor glow */
+.projector{
+  position:absolute; left:50%; top:50%;
+  width:340px; height:340px; margin:-170px 0 0 -170px;
+  border-radius:999px; transform:translateZ(1px);
+  background:radial-gradient(circle, rgba(125,228,245,.30), rgba(37,99,235,.12) 42%, transparent 68%);
+  opacity:0; transition:opacity .9s var(--ease), transform 1.1s var(--ease);
+  pointer-events:none;
+}
+.stage.open .projector{opacity:1; transform:translateZ(1px) scale(1.25);}
+
+/* fanned holo sheets */
+.sheet{
+  position:absolute; left:50%; top:50%;
+  width:212px; height:158px; margin:-79px 0 0 -106px;
+  border-radius:10px;
+  transform-style:preserve-3d; backface-visibility:hidden;
+  background:
+    linear-gradient(168deg,
+      rgba(128,224,248,.62) 0%,
+      rgba(52,150,226,.72) 34%,
+      rgba(21,82,190,.84) 68%,
+      rgba(7,28,92,.94) 100%);
+  border:1px solid rgba(170,236,255,.55);
+  box-shadow:0 0 0 1px rgba(8,22,60,.5), 0 20px 50px rgba(0,0,0,.5),
+             inset 0 1px 0 rgba(215,247,255,.4);
+  padding:15px 17px; overflow:hidden;
+  opacity:0;
+  transform:translate3d(0,0,0) scale(.55);
+  transition:transform 1.05s var(--ease), opacity .8s var(--ease),
+             box-shadow .45s var(--ease), filter .45s var(--ease);
+  will-change:transform, opacity;
+}
+.sheet::before{   /* holo scanlines on each sheet */
+  content:''; position:absolute; inset:0; border-radius:10px; pointer-events:none;
+  background:repeating-linear-gradient(180deg, rgba(220,250,255,.17) 0 1px, transparent 1px 5px);
+  opacity:.75;
+}
+.sheet::after{   /* inner frame */
+  content:''; position:absolute; inset:7px; border-radius:6px; pointer-events:none;
+  border:1px solid rgba(200,244,255,.34);
+}
+.stage.open .sheet{opacity:1;}
+.sheet .sh-no{
+  font-family:var(--f-mono); font-size:9.5px; letter-spacing:.24em;
+  color:rgba(215,247,255,.82); display:block; margin-bottom:2px;
+}
+.sheet h4{
+  font-family:var(--f-display); font-weight:700; font-size:17px; line-height:1.25;
+  margin:0 0 9px; color:#F4FCFF;
+  text-shadow:0 1px 10px rgba(4,16,48,.7);
+}
+.sheet p{
+  margin:0 0 5px; font-size:12.4px; line-height:1.5; font-weight:300;
+  color:rgba(233,249,255,.93);
+  text-shadow:0 1px 6px rgba(4,16,48,.6);
+}
+.sheet .bar{
+  position:absolute; left:17px; bottom:14px; height:2px; width:34px; border-radius:2px;
+  background:rgba(190,240,255,.9); box-shadow:0 0 10px rgba(125,228,245,.9);
+}
+.sheet.hot{
+  box-shadow:0 0 0 1px rgba(160,236,255,.9), 0 0 42px rgba(110,220,250,.5),
+             0 26px 60px rgba(0,0,0,.55), inset 0 1px 0 rgba(215,247,255,.55);
+}
+.stage.open .sheet.dim{filter:saturate(.55) brightness(.72); opacity:.42;}
+
+.stage-hint{
+  position:absolute; z-index:6; left:0; right:0; top:22px;
+  text-align:center; pointer-events:none;
+  font-family:var(--f-mono); font-size:11px; letter-spacing:.2em;
+  color:rgba(190,240,255,.62);
+  transition:opacity .5s;
+}
+.stage.open .stage-hint{opacity:0;}
+.stage-step{
+  position:absolute; z-index:6; left:0; right:0; bottom:20px; margin:0;
+  text-align:center; pointer-events:none; opacity:0;
+  font-family:var(--f-mono); font-size:11px; letter-spacing:.2em;
+  color:rgba(190,240,255,.72); transition:opacity .5s;
+}
+.stage.open .stage-step{opacity:1;}
+
+.deck-list{
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(152px,1fr));
+  gap:10px; margin-top:20px;
+}
+.deck-list button{
+  font-family:var(--f-display); font-weight:600; font-size:13.5px; text-align:left;
+  color:var(--ink); background:var(--paper);
+  border:1px solid var(--line); border-radius:12px; padding:12px 14px;
+  cursor:pointer;
+  transition:border-color .3s, color .3s, transform .45s var(--ease), box-shadow .45s var(--ease);
+}
+.deck-list button small{
+  display:block; font-family:var(--f-body); font-weight:300; font-size:11.5px;
+  color:var(--muted); margin-top:3px; line-height:1.5;
+}
+.deck-list button:hover, .deck-list button.hot{
+  border-color:var(--blue); color:var(--blue);
+  transform:translateY(-3px); box-shadow:0 12px 26px rgba(37,99,235,.15);
+}
+
+/* ═══════════════ SPOTLIGHT CARDS ═══════════════ */
+@property --ang{syntax:'<angle>'; initial-value:0deg; inherits:false;}
+
+.cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(272px,1fr)); gap:18px;}
+.card{
+  position:relative; border-radius:18px; padding:1px; overflow:hidden;
+  background:var(--line);
+  transition:transform .5s var(--ease), box-shadow .5s var(--ease);
+  will-change:transform;
+}
+.card::before{  /* rotating gradient border, only while hovered */
+  content:''; position:absolute; inset:-60%; opacity:0;
+  background:conic-gradient(from var(--ang),
+    transparent 0deg, var(--cyan) 42deg, var(--blue) 86deg, transparent 140deg);
+  transition:opacity .45s;
+}
+.card:hover::before{opacity:1; animation:angSpin 3.4s linear infinite;}
+@keyframes angSpin{to{--ang:360deg;}}
+.card-in{
+  position:relative; z-index:1; height:100%; border-radius:17px;
+  background:var(--paper); padding:26px 24px 28px;
+  overflow:hidden;
+}
+.card-in::after{  /* cursor spotlight */
+  content:''; position:absolute; inset:0; pointer-events:none; opacity:0;
+  background:radial-gradient(320px circle at var(--mx,50%) var(--my,50%),
+             rgba(37,99,235,.10), transparent 62%);
+  transition:opacity .4s;
+}
+.card:hover .card-in::after{opacity:1;}
+.card:hover{transform:translateY(-6px); box-shadow:var(--shadow-m);}
+.card .ico{
+  width:44px; height:44px; border-radius:12px; display:grid; place-items:center;
+  background:linear-gradient(140deg, rgba(6,182,212,.14), rgba(37,99,235,.12));
+  border:1px solid rgba(37,99,235,.2);
+  margin-bottom:16px;
+}
+.card .ico svg{width:21px; height:21px; stroke:var(--blue); fill:none; stroke-width:1.7;}
+.card h3{
+  font-family:var(--f-display); font-weight:600; font-size:17.5px;
+  margin:0 0 9px; color:var(--ink); position:relative; z-index:1;
+}
+.card p{margin:0; font-size:14px; line-height:1.72; color:var(--ink-2); font-weight:300; position:relative; z-index:1;}
+.card .kv{
+  display:flex; gap:7px; flex-wrap:wrap; margin-top:15px; position:relative; z-index:1;
+}
+.card .kv i{
+  font-style:normal; font-family:var(--f-mono); font-size:10px; letter-spacing:.09em;
+  color:var(--blue-deep); background:rgba(6,182,212,.1);
+  border:1px solid rgba(6,182,212,.2); border-radius:5px; padding:3px 8px;
+}
+
+/* ═══════════════ TIMELINE ═══════════════ */
+.tl{position:relative; display:grid; gap:0; margin-top:8px;}
+.tl-svg{position:absolute; left:19px; top:0; width:2px; height:100%; overflow:visible;}
+.tl-svg path{
+  fill:none; stroke:url(#tlgrad); stroke-width:2; stroke-linecap:round;
+  stroke-dasharray:var(--len,1000); stroke-dashoffset:var(--len,1000);
+  transition:stroke-dashoffset 1.6s var(--ease);
+}
+.tl.in .tl-svg path{stroke-dashoffset:0;}
+.tl-item{position:relative; padding:0 0 32px 58px;}
+.tl-item:last-child{padding-bottom:0;}
+.tl-dot{
+  position:absolute; left:11px; top:4px; width:18px; height:18px; border-radius:999px;
+  background:var(--paper); border:2px solid var(--line);
+  display:grid; place-items:center;
+  transition:border-color .5s var(--ease), box-shadow .5s var(--ease), transform .5s var(--ease);
+}
+.tl-dot::after{
+  content:''; width:6px; height:6px; border-radius:999px; background:var(--line);
+  transition:background .5s var(--ease);
+}
+.tl-item.lit .tl-dot{border-color:var(--blue); box-shadow:0 0 0 5px rgba(37,99,235,.12); transform:scale(1.08);}
+.tl-item.lit .tl-dot::after{background:var(--blue);}
+.tl-item h4{
+  font-family:var(--f-display); font-weight:600; font-size:16.5px;
+  margin:0 0 5px; color:var(--ink);
+}
+.tl-item p{margin:0; font-size:14px; line-height:1.72; color:var(--ink-2); font-weight:300;}
+.tl-item .step{
+  font-family:var(--f-mono); font-size:10px; letter-spacing:.2em;
+  color:var(--cyan); display:block; margin-bottom:4px; text-transform:uppercase;
+}
+
+/* ═══════════════ BEFORE / AFTER ═══════════════ */
+.ba{
+  position:relative; border-radius:20px; overflow:hidden;
+  border:1px solid var(--line); box-shadow:var(--shadow-m);
+  aspect-ratio:16/9; max-width:100%; user-select:none; touch-action:none;
+  background:var(--paper); cursor:ew-resize;
+}
+.ba-pane{position:absolute; inset:0; display:grid; place-items:center; padding:30px;}
+.ba-a{background:linear-gradient(150deg,#E9EEF7,#D8E0EE);}
+.ba-b{
+  background:
+    radial-gradient(ellipse 60% 50% at 20% 15%, rgba(6,182,212,.2), transparent 60%),
+    radial-gradient(ellipse 60% 50% at 82% 88%, rgba(37,99,235,.22), transparent 60%),
+    linear-gradient(150deg,#0A1738,#04091A);
+  clip-path:inset(0 0 0 var(--split,50%));
+}
+.ba-card{
+  width:min(340px,80%); border-radius:14px; padding:18px 20px;
+  font-family:var(--f-display); text-align:left;
+}
+.ba-a .ba-card{
+  background:#F6F8FC; border:1px solid #C6CFDE; color:#55617A;
+  box-shadow:0 2px 6px rgba(0,0,0,.06);
+}
+.ba-b .ba-card{
+  background:rgba(12,32,80,.66); border:1px solid rgba(125,228,245,.42); color:#EAF8FF;
+  box-shadow:0 0 30px rgba(37,99,235,.35), inset 0 1px 0 rgba(190,240,255,.28);
+  backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+}
+.ba-card b{display:block; font-weight:700; font-size:17px; margin-bottom:6px;}
+.ba-card span{
+  display:block; font-family:var(--f-body); font-weight:300; font-size:13px; line-height:1.6;
+  opacity:.9;
+}
+.ba-tag{
+  position:absolute; top:14px; font-family:var(--f-mono); font-size:10px;
+  letter-spacing:.18em; padding:5px 11px; border-radius:6px; z-index:3;
+}
+.ba-tag.l{left:14px; background:rgba(255,255,255,.9); color:#55617A; border:1px solid #C6CFDE;}
+.ba-tag.r{right:14px; background:rgba(10,26,64,.8); color:#BEEFFF; border:1px solid rgba(125,228,245,.4);}
+.ba-handle{
+  position:absolute; top:0; bottom:0; left:var(--split,50%); width:2px; z-index:4;
+  background:linear-gradient(var(--cyan),var(--blue));
+  box-shadow:0 0 18px rgba(6,182,212,.75);
+  transform:translateX(-1px);
+}
+.ba-knob{
+  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+  width:44px; height:44px; border-radius:999px;
+  background:var(--paper); border:1px solid var(--line);
+  box-shadow:var(--shadow-m); display:grid; place-items:center;
+}
+.ba-knob svg{width:20px; height:20px; stroke:var(--blue); fill:none; stroke-width:1.8;}
+
+/* ═══════════════ CTA ═══════════════ */
+.cta{
+  position:relative; border-radius:26px; overflow:hidden; text-align:center;
+  padding:66px 30px;
+  background:
+    radial-gradient(ellipse 60% 70% at 50% 0%, rgba(6,182,212,.22), transparent 62%),
+    linear-gradient(160deg,var(--stage-2),var(--stage));
+  border:1px solid rgba(125,228,245,.18);
+  box-shadow:var(--shadow-l);
+}
+.cta::before{
+  content:''; position:absolute; inset:0; pointer-events:none;
+  background:
+    linear-gradient(rgba(125,228,245,.05) 1px, transparent 1px) 0 0/48px 48px,
+    linear-gradient(90deg, rgba(125,228,245,.05) 1px, transparent 1px) 0 0/48px 48px;
+  mask-image:radial-gradient(ellipse 70% 70% at 50% 40%, #000, transparent 75%);
+  -webkit-mask-image:radial-gradient(ellipse 70% 70% at 50% 40%, #000, transparent 75%);
+}
+.cta h2{
+  position:relative; font-family:var(--f-display); font-weight:700;
+  font-size:clamp(25px,4vw,42px); line-height:1.2; margin:0 0 14px; color:#F2FBFF;
+  text-wrap:balance;
+}
+.cta p{
+  position:relative; margin:0 auto 30px; max-width:50ch;
+  font-size:15.5px; font-weight:300; line-height:1.8; color:rgba(215,240,255,.82);
+}
+.cta .btn{background:#fff; color:var(--ink); border-color:transparent;}
+.cta .btn.ghost{
+  background:transparent; color:#D9F2FF; border-color:rgba(125,228,245,.4);
+}
+
+/* ═══════════════ FOOTER ═══════════════ */
+footer.ft{
+  padding:44px 0 60px; border-top:1px solid var(--line); margin-top:90px;
+  display:flex; flex-wrap:wrap; gap:18px; align-items:center; justify-content:space-between;
+  font-family:var(--f-mono); font-size:11.5px; letter-spacing:.1em; color:var(--muted);
+}
+footer.ft a{color:var(--blue); text-decoration:none; border-bottom:1px solid transparent; transition:border-color .3s;}
+footer.ft a:hover{border-bottom-color:var(--blue);}
+
+/* ═══════════════ AMBIENT (circuit + hearts) ═══════════════ */
+.amb-circuit{position:fixed; inset:0; pointer-events:none !important; z-index:-2; overflow:hidden;}
+.amb-line{position:absolute; background:rgba(37,99,235,.075); pointer-events:none !important;}
+.amb-line.h{left:0; width:100%; height:1px;}
+.amb-line.v{top:0; width:1px; height:100%;}
+.amb-pulse{
+  position:absolute; border-radius:999px; pointer-events:none !important;
+  filter:drop-shadow(0 0 5px var(--cyan)) drop-shadow(0 0 11px rgba(37,99,235,.7));
+}
+.amb-line.h .amb-pulse{
+  top:-1px; left:0; width:130px; height:3px;
+  background:linear-gradient(90deg,transparent,var(--cyan) 58%,var(--blue) 86%,transparent);
+  animation:ambH 6s linear infinite;
+}
+.amb-line.v .amb-pulse{
+  left:-1px; top:0; width:3px; height:130px;
+  background:linear-gradient(180deg,transparent,var(--cyan) 58%,var(--blue) 86%,transparent);
+  animation:ambV 6.8s linear infinite;
+}
+@keyframes ambH{
+  0%{transform:translateX(-140px); opacity:0;} 10%{opacity:.85;} 90%{opacity:.85;}
+  100%{transform:translateX(calc(100vw + 140px)); opacity:0;}
+}
+@keyframes ambV{
+  0%{transform:translateY(-140px); opacity:0;} 10%{opacity:.8;} 90%{opacity:.8;}
+  100%{transform:translateY(calc(100vh + 140px)); opacity:0;}
+}
+#hearts{position:fixed; inset:0; pointer-events:none !important; z-index:-1; overflow:hidden;}
+.heart{
+  position:absolute; bottom:-44px; user-select:none; pointer-events:none !important;
+  will-change:transform,opacity;
+  animation-name:heartUp; animation-timing-function:cubic-bezier(.25,.46,.45,.94);
+  animation-fill-mode:forwards;
+}
+@keyframes heartUp{
+  0%{  transform:translateY(0) translateX(0) rotate(0) scale(.6); opacity:0; filter:hue-rotate(0);}
+  10%{ opacity:.9;}
+  24%{ transform:translateY(-24vh) translateX(calc(var(--sw,26px) * -1)) rotate(calc(var(--rt,15deg) * -1)) scale(1);}
+  46%{ transform:translateY(-46vh) translateX(var(--sw,26px)) rotate(var(--rt,15deg)) scale(1.04);}
+  68%{ transform:translateY(-68vh) translateX(calc(var(--sw,26px) * -.65)) rotate(calc(var(--rt,15deg) * -.6)) scale(.94); opacity:.68;}
+  86%{ transform:translateY(-88vh) translateX(calc(var(--dr,12px) + var(--sw,26px) * .35)) rotate(calc(var(--rt,15deg) * .35)) scale(.78); opacity:.42; filter:hue-rotate(34deg);}
+  100%{transform:translateY(-110vh) translateX(var(--dr,12px)) rotate(calc(var(--rt,15deg) * .18)) scale(.5); opacity:0; filter:hue-rotate(64deg);}
+}
+
+/* ═══════════════ RESPONSIVE ═══════════════ */
+@media (max-width:820px){
+  section.blk{padding:74px 0;}
+  .wrap{padding:0 20px;}
+  .topbar{padding:12px 20px;}
+  .stage{height:min(56vh,430px); min-height:346px;}
+  .deck{width:230px; height:150px;}
+  .sheet{width:178px; height:140px; margin:-70px 0 0 -89px; padding:11px 12px;}
+  .sheet h4{font-size:14.5px;}
+  .sheet p{font-size:11px;}
+}
+@media (max-width:520px){
+  body{font-size:15px;}
+  .wrap{padding:0 16px;}
+  .hero{padding:104px 16px 80px;}
+  .hero-cta{flex-direction:column; align-items:stretch;}
+  .btn{justify-content:center;}
+  .ba{aspect-ratio:4/5;}
+  footer.ft{flex-direction:column; align-items:flex-start; gap:12px;}
+}
+
+/* ═══════════════ REDUCED MOTION ═══════════════ */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto;}
+  *,*::before,*::after{
+    animation-duration:.001ms !important; animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
   }
+  .grain, .amb-circuit, #hearts, .cur-dot, .cur-ring{display:none !important;}
+  .rv, .rv-stagger > *{opacity:1 !important; transform:none !important;}
+  #aurora{display:none;}
+}
+/* touch devices: no custom cursor */
+@media (pointer:coarse){
+  .cur-dot, .cur-ring{display:none !important;}
+}
 </style>
+</head>
+<body>
 
-<p class="premium-strip">แพ็กเกจ <b>พรีเมียม</b> — งานตัวอย่างสาธิตระดับการตกแต่งขั้นสูงสุด</p>
+<!-- ════ PRELOADER ════ -->
+<div class="preload" id="preload">
+  <svg class="pl-mark" viewBox="0 0 48 48" aria-hidden="true">
+    <path d="M24 5 L41 14.5 L41 33.5 L24 43 L7 33.5 L7 14.5 Z" style="--len:130"/>
+    <circle cx="24" cy="24" r="8.5" style="--len:54"/>
+  </svg>
+  <div class="pl-bar"><i id="plBar"></i></div>
+  <p class="pl-num" id="plNum">0%</p>
+</div>
 
-<header class="hero" id="hero">
-  <span class="grid-overlay" aria-hidden="true"></span>
-  <span class="cloud c1" aria-hidden="true"></span>
-  <span class="cloud c2" aria-hidden="true"></span>
-  <span class="cloud c3" aria-hidden="true"></span>
-  <span class="cloud c4" aria-hidden="true"></span>
-  <div class="hero-body">
-    <p class="premium-tag"><i></i>ม.4/8 · โรงเรียนสรรพวิทยาคม</p>
-    <h1>คู่มือใช้งานเว็บห้อง<br><em>ฉบับพรีเมียม</em></h1>
-    <p class="standfirst">ทุกฟีเจอร์ของเว็บ อธิบายผ่านภาพสามมิติที่แยกชิ้นได้จริง พร้อมขั้นตอนละเอียดของทั้งสองหน้า</p>
-    <a class="site-link" href="https://jakapongdiwaa-hash.github.io/PREMIUM-WEB-Ultra4x/" target="_blank" rel="noopener">jakapongdiwaa-hash.github.io/PREMIUM-WEB-Ultra4x</a>
+<div class="grain" aria-hidden="true"></div>
+<div class="progress" id="progress" aria-hidden="true"></div>
+<div class="cur-ring" id="curRing" aria-hidden="true"></div>
+<div class="cur-dot" id="curDot" aria-hidden="true"></div>
+
+<!-- ════ AMBIENT LAYERS ════ -->
+<div class="amb-circuit" id="ambCircuit" aria-hidden="true"></div>
+<div id="hearts" aria-hidden="true"></div>
+
+<!-- ════ TOP BAR ════ -->
+<div class="topbar" id="topbar">
+  <span><i class="tb-dot"></i><b>ULTRA&nbsp;4X</b></span>
+  <span class="tb-right">
+    <span>ม.4/8 · สรรพวิทยาคม</span>
+    <span id="clock">--:--:--</span>
+  </span>
+</div>
+
+<!-- ════ HERO ════ -->
+<header class="hero">
+  <canvas id="aurora" aria-hidden="true"></canvas>
+  <div class="hero-grid" aria-hidden="true"></div>
+
+  <div class="hero-inner">
+    <p class="eyebrow"><i></i>PREMIUM EDITION · แพ็กเกจพรีเมียม</p>
+    <h1 class="mega">
+      คู่มือใช้งานเว็บห้อง<br>
+      <span class="shine" data-scramble="ฉบับพรีเมียม">ฉบับพรีเมียม</span>
+    </h1>
+    <p class="hero-sub">
+      ทุกฟีเจอร์ของเว็บ อธิบายผ่านภาพโฮโลแกรมสามมิติที่กางออกได้จริง
+      พร้อมขั้นตอนละเอียดของทั้งกระดานของหายและระบบเช็คชื่อ
+    </p>
+    <div class="hero-cta">
+      <a class="btn solid" href="#manual" data-magnet>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+        ดูวิธีใช้งาน
+      </a>
+      <a class="btn" href="https://jakapongdiwaa-hash.github.io/pun-chakapong/" target="_blank" rel="noopener" data-magnet>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/></svg>
+        เปิดเว็บจริง
+      </a>
+    </div>
   </div>
-  <p class="scrollcue" id="scrollcue">
-    เลื่อนลงเพื่อดูวิธีใช้งาน
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 4v15M5 13l7 7 7-7"/></svg>
-  </p>
+
+  <div class="scrollcue" aria-hidden="true">
+    <span>เลื่อนลง</span>
+    <span class="rail"></span>
+  </div>
 </header>
 
-<svg id="trail" viewBox="0 0 3 100" preserveAspectRatio="none" aria-hidden="true">
-  <line x1="1.5" y1="0" x2="1.5" y2="100" stroke="#DCE7FA" stroke-width="1"/>
-  <line id="trailFill" x1="1.5" y1="0" x2="1.5" y2="0" stroke="#2563EB" stroke-width="2" stroke-linecap="round"/>
-  <circle id="trailDot" cx="1.5" cy="0" r="4" fill="#06B6D4"/>
-</svg>
+<!-- ════ MARQUEE ════ -->
+<div class="marquee" aria-hidden="true">
+  <div class="mq-track" id="mqTrack"></div>
+</div>
 
-<!-- ============ 3D ANATOMY ============ -->
-<section class="anatomy">
-  <div class="page">
-    <div class="anatomy-head">
-      <p class="kicker">HOLOGRAM / วิธีใช้งาน</p>
-      <h2>นำเมาส์ไปวางเพื่อดูเพิ่มเติม</h2>
-      <p class="sec-note">คู่มือที่วางปิดอยู่จะกางออกเป็นภาพโฮโลแกรม ฉายขั้นตอนการใช้งานขึ้นมาทีละแผ่น บนมือถือใช้การแตะแทน</p>
-    </div>
-
-    <div class="stage" id="stage">
-      <canvas id="rig"></canvas>
-      <div class="fallback" id="fallback">เครื่องนี้แสดงภาพสามมิติไม่ได้<br>เลื่อนลงไปอ่านรายชื่อชิ้นส่วนด้านล่างได้เลย</div>
-      <div class="loading" id="loading" aria-hidden="true"><span class="bar"><i></i></span>กำลังเตรียมภาพสามมิติ</div>
-    </div>
-
-    <div class="anatomy-list" id="partList">
-      <button type="button" data-i="0">เปิดเว็บ<small>เลือกแท็บที่ต้องการใช้งาน</small></button>
-      <button type="button" data-i="1">แจ้งของหาย<small>กรอกฟอร์ม แนบรูป ขึ้นกระดานทันที</small></button>
-      <button type="button" data-i="2">เข้าสู่ระบบ<small>ใช้อีเมลโรงเรียนเท่านั้น</small></button>
-      <button type="button" data-i="3">ถ่ายรูปเช็คชื่อ<small>กดปุ่มกล้อง ส่งแล้วขึ้นสถานะ</small></button>
-      <button type="button" data-i="4">แจ้งลา / ย้อนหลัง<small>ลาได้ เลือกวันที่ย้อนดูได้</small></button>
+<!-- ════ STATS ════ -->
+<section class="blk" id="stats">
+  <div class="wrap">
+    <div class="stats rv" data-rv>
+      <div class="stat"><span class="n" data-count="40">0</span><span class="l">นักเรียนในห้อง</span></div>
+      <div class="stat"><span class="n" data-count="2">0</span><span class="l">ระบบในเว็บเดียว</span></div>
+      <div class="stat"><span class="n" data-count="100"><em>%</em></span><span class="l">รองรับมือถือ</span></div>
+      <div class="stat"><span class="n" data-count="0"><em>฿</em></span><span class="l">ค่าเซิร์ฟเวอร์/เดือน</span></div>
     </div>
   </div>
 </section>
 
-<nav class="jumpbar">
-  <div class="jump">
-    <a href="#lostfound">หน้า 1 · กระดานของหาย</a>
-    <a href="#attendance">หน้า 2 · เช็คชื่อ</a>
-    <a href="#admin">สำหรับครู / แอดมิน</a>
-    <a href="#fix">แก้ปัญหาที่เจอบ่อย</a>
+<!-- ════ HOLOGRAM MANUAL ════ -->
+<section class="blk" id="manual">
+  <div class="wrap">
+    <div class="sec-head rv" data-rv>
+      <span class="sec-tag">Hologram / วิธีใช้งาน</span>
+      <h2 class="sec" data-scramble="นำเมาส์ไปวางเพื่อกางคู่มือ">นำเมาส์ไปวางเพื่อกางคู่มือ</h2>
+      <p class="sec-note">
+        คู่มือที่วางปิดอยู่จะกางออกเป็นภาพโฮโลแกรม ฉายขั้นตอนการใช้งานขึ้นมาทีละแผ่น
+        ชี้ไปที่แผ่นไหนแผ่นนั้นจะเด่นขึ้น บนมือถือใช้การแตะแทน
+      </p>
+    </div>
+
+    <div class="stage-wrap rv" data-rv>
+      <div class="stage" id="stage" tabindex="0" role="button" aria-label="กางคู่มือโฮโลแกรม">
+        <p class="stage-hint" id="stageHint">HOVER TO OPEN · นำเมาส์มาวาง</p>
+        <p class="stage-step" id="stageStep" aria-hidden="true"></p>
+        <div class="deck" id="deck">
+          <div class="projector" aria-hidden="true"></div>
+          <div class="book" aria-hidden="true">
+            <div class="cover"></div>
+            <div class="spine"></div>
+            <div class="glyph">4/8 MANUAL</div>
+          </div>
+          <!-- sheets injected by script -->
+        </div>
+      </div>
+    </div>
+
+    <div class="deck-list" id="deckList"></div>
   </div>
-</nav>
+</section>
 
-<div class="page">
+<!-- ════ FEATURE CARDS ════ -->
+<section class="blk" id="features">
+  <div class="wrap">
+    <div class="sec-head rv" data-rv>
+      <span class="sec-tag">Features / ฟีเจอร์</span>
+      <h2 class="sec" data-scramble="สองระบบ อยู่ในเว็บเดียว">สองระบบ อยู่ในเว็บเดียว</h2>
+      <p class="sec-note">แตะการ์ดเพื่อดูรายละเอียด แต่ละใบคือฟีเจอร์ที่ใช้งานจริงอยู่ทุกวัน</p>
+    </div>
 
-  <!-- ============ PAGE 1 ============ -->
-  <section class="doc" id="lostfound">
-    <div class="sec-head"><span class="sec-tag">หน้า 1</span><h2>กระดานของหาย</h2></div>
-    <p class="sec-note">ไม่ต้องล็อกอิน เปิดปุ๊บใช้ได้เลย ทุกคนเห็นสิ่งที่แจ้งเหมือนกันหมด</p>
+    <div class="cards rv-stagger" data-rv>
+      <div class="card"><div class="card-in">
+        <div class="ico"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M21 21l-4.35-4.35M11 19a8 8 0 1 1 0-16 8 8 0 0 1 0 16z"/></svg></div>
+        <h3>กระดานของหาย</h3>
+        <p>แจ้งของหายหรือแจ้งว่าเจอของ แนบรูปได้ ขึ้นกระดานให้ทั้งห้องเห็นทันที ไม่ต้องล็อกอิน</p>
+        <div class="kv"><i>ไม่ต้องล็อกอิน</i><i>แนบรูปได้</i><i>เรียลไทม์</i></div>
+      </div></div>
 
-    <div class="board" tabindex="0" role="group" aria-label="ฟีเจอร์ของกระดานของหาย เลื่อนเมาส์หรือแตะเพื่อดูรายละเอียด">
-      <span class="board-eyebrow">ฟีเจอร์ในหน้านี้ — ชี้หรือแตะเพื่อดูสรุป</span>
-      <div class="chips">
-        <div class="chip" tabindex="0"><p>แจ้งของหาย / เจอของ</p><span class="detail">กรอกชื่อ สิ่งของ สถานะ สถานที่ เวลา ช่องทางติดต่อ แนบรูปได้ กด "แจ้งข้อมูล" ขึ้นกระดานทันที</span></div>
-        <div class="chip" tabindex="0"><p>ดูรายการทั้งหมด</p><span class="detail">กรองของหาย/เจอของ ซ่อนรายการที่จบแล้วได้ แตะการ์ดเปิดดูรายละเอียดเต็มจอ</span></div>
-        <div class="chip" tabindex="0"><p>พบเจ้าของแล้ว</p><span class="detail">กดปิดเรื่องได้ ย้อนกลับได้ถ้ากดผิด ส่วนปุ่มลบคือลบถาวร กู้คืนไม่ได้</span></div>
+      <div class="card"><div class="card-in">
+        <div class="ico"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
+        <h3>เช็คชื่อด้วยรูปถ่าย</h3>
+        <p>ถ่ายรูปสดยืนยันตัวตนประจำวัน ระบบบันทึกเวลาให้อัตโนมัติ บนคอมก็เปิดกล้องในหน้าเว็บได้เลย</p>
+        <div class="kv"><i>ถ่ายสด</i><i>ลงเวลาอัตโนมัติ</i><i>คอม + มือถือ</i></div>
+      </div></div>
+
+      <div class="card"><div class="card-in">
+        <div class="ico"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <h3>ล็อกอินเฉพาะคนในโรงเรียน</h3>
+        <p>รับเฉพาะอีเมล @sappha.ac.th เท่านั้น ครั้งแรกกรอกเลขที่กับชื่อ ครั้งต่อไปเข้าได้เลย</p>
+        <div class="kv"><i>Google Sign-In</i><i>กันคนนอก</i></div>
+      </div></div>
+
+      <div class="card"><div class="card-in">
+        <div class="ico"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8"/></svg></div>
+        <h3>แจ้งลาในตัว</h3>
+        <p>วันไหนมาไม่ได้ กดแจ้งลาพร้อมเขียนเหตุผลแทนการถ่ายรูป แนบใบลาหรือใบรับรองแพทย์เพิ่มได้</p>
+        <div class="kv"><i>เขียนเหตุผล</i><i>แนบเอกสาร</i></div>
+      </div></div>
+
+      <div class="card"><div class="card-in">
+        <div class="ico"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
+        <h3>ดูย้อนหลังได้ทุกวัน</h3>
+        <p>เลือกวันที่เพื่อดูสถานะย้อนหลัง ข้อมูลเก่าไม่หาย พอขึ้นวันใหม่ทุกคนรีเซ็ตอัตโนมัติ</p>
+        <div class="kv"><i>เลือกวันที่</i><i>ไม่ลบข้อมูล</i></div>
+      </div></div>
+
+      <div class="card"><div class="card-in">
+        <div class="ico"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></div>
+        <h3>ส่งออกเป็นไฟล์ Excel</h3>
+        <p>แอดมินเลือกเดือนแล้วโหลดประวัติเช็คชื่อทั้งเดือนเป็นไฟล์ CSV ภาษาไทยไม่เพี้ยน</p>
+        <div class="kv"><i>CSV + BOM</i><i>รายเดือน</i></div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ TIMELINE ════ -->
+<section class="blk" id="flow">
+  <div class="wrap">
+    <div class="sec-head rv" data-rv>
+      <span class="sec-tag">Flow / ขั้นตอน</span>
+      <h2 class="sec" data-scramble="แจ้งของหาย ทีละขั้น">แจ้งของหาย ทีละขั้น</h2>
+      <p class="sec-note">ตั้งแต่เปิดเว็บจนของกลับคืนเจ้าของ ห้าขั้นตอน ไม่ต้องสมัครสมาชิก</p>
+    </div>
+
+    <div class="tl rv" id="tl" data-rv>
+      <svg class="tl-svg" preserveAspectRatio="none" aria-hidden="true">
+        <defs><linearGradient id="tlgrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#06B6D4"/><stop offset="100%" stop-color="#2563EB"/>
+        </linearGradient></defs>
+        <path id="tlPath" d="M1 0 L1 1000"/>
+      </svg>
+
+      <div class="tl-item"><span class="tl-dot"></span>
+        <span class="step">Step 01</span><h4>เลือกแท็บกระดานของหาย</h4>
+        <p>เปิดเว็บแล้วกดแท็บ “กระดานของหาย” ด้านบน ไม่ต้องล็อกอินอะไรทั้งนั้น</p>
+      </div>
+      <div class="tl-item"><span class="tl-dot"></span>
+        <span class="step">Step 02</span><h4>เลือกว่าของหาย หรือเจอของ</h4>
+        <p>กดปุ่มสถานะให้ตรงกับเรื่องที่จะแจ้ง สีจะเปลี่ยนตามที่เลือก</p>
+      </div>
+      <div class="tl-item"><span class="tl-dot"></span>
+        <span class="step">Step 03</span><h4>กรอกรายละเอียด แนบรูปได้</h4>
+        <p>ชื่อ สิ่งของ สถานที่ เวลา ช่องทางติดต่อ แนบรูปถ้ามีจะช่วยให้คนจำได้ง่ายขึ้นมาก</p>
+      </div>
+      <div class="tl-item"><span class="tl-dot"></span>
+        <span class="step">Step 04</span><h4>กดแจ้งข้อมูล ขึ้นกระดานทันที</h4>
+        <p>โพสต์จะขึ้นให้ทุกคนที่เปิดเว็บเห็นทันที แตะการ์ดเพื่อเปิดดูรายละเอียดเต็มจอได้</p>
+      </div>
+      <div class="tl-item"><span class="tl-dot"></span>
+        <span class="step">Step 05</span><h4>เจอเจ้าของแล้ว กดปิดเรื่อง</h4>
+        <p>กด “พบเจ้าของแล้ว” เพื่อปิดเรื่อง กดผิดย้อนกลับได้ ส่วนปุ่มลบคือลบถาวร กู้คืนไม่ได้</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ BEFORE / AFTER ════ -->
+<section class="blk" id="compare">
+  <div class="wrap">
+    <div class="sec-head rv" data-rv>
+      <span class="sec-tag">Compare / เทียบให้เห็น</span>
+      <h2 class="sec" data-scramble="ธรรมดา กับ พรีเมียม">ธรรมดา กับ พรีเมียม</h2>
+      <p class="sec-note">ลากตรงกลางไปซ้ายขวา เพื่อเทียบงานแพ็กเกจธรรมดากับแพ็กเกจพรีเมียม</p>
+    </div>
+
+    <div class="ba rv" id="ba" data-rv style="--split:50%">
+      <div class="ba-pane ba-a">
+        <div class="ba-card"><b>แพ็กเกจธรรมดา</b>
+          <span>หน้าเว็บใช้งานได้ครบ ฟอร์มทำงานถูกต้อง แต่เป็นดีไซน์นิ่งๆ ไม่มีลูกเล่น</span></div>
+      </div>
+      <div class="ba-pane ba-b">
+        <div class="ba-card"><b>แพ็กเกจพรีเมียม</b>
+          <span>โฮโลแกรมสามมิติ เชเดอร์ไล่สี เคอร์เซอร์กำหนดเอง อนิเมชันตามสกรอลล์ ครบทุกอย่าง</span></div>
+      </div>
+      <span class="ba-tag l">ธรรมดา</span>
+      <span class="ba-tag r">พรีเมียม</span>
+      <div class="ba-handle" id="baHandle">
+        <div class="ba-knob"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M8 7 4 12l4 5M16 7l4 5-4 5"/></svg></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ CTA ════ -->
+<section class="blk" id="contact">
+  <div class="wrap">
+    <div class="cta rv" data-rv>
+      <h2>อยากได้เว็บแบบนี้บ้างไหม</h2>
+      <p>รับทำเว็บไซต์ ทั้งเว็บใช้งานจริงที่มีระบบหลังบ้าน และเว็บงานอีเวนต์หรือของขวัญพิเศษ</p>
+      <div class="hero-cta">
+        <a class="btn" href="https://jakapongdiwaa-hash.github.io/pun-chakapong/" target="_blank" rel="noopener" data-magnet>ดูเว็บที่ใช้งานจริง</a>
+        <a class="btn ghost" href="#manual" data-magnet>ย้อนดูวิธีใช้อีกครั้ง</a>
       </div>
     </div>
 
-    <h3>แจ้งของหาย หรือแจ้งว่าเจอของ</h3>
-    <ol class="steps">
-      <li><p>เปิดเว็บขึ้นมา จะอยู่ที่แท็บ <b class="ui">กระดานของหาย</b> ให้อยู่แล้ว</p></li>
-      <li><p>กรอก <b class="ui">ชื่อ-นามสกุล</b> ของตัวเอง กับ <b class="ui">ชื่อสิ่งของที่พบ/หาย</b></p></li>
-      <li><p>เลือก <b class="ui">สถานะ</b> ให้ถูก — กด <b class="ui">ของหาย</b> ถ้าของเราหาย หรือกด <b class="ui">เจอของ</b> ถ้าเราเก็บของคนอื่นได้</p><p class="why">เลือกผิดคนจะกรองไม่เจอ เพราะกระดานล่างแยกสองอย่างนี้ออกจากกัน</p></li>
-      <li><p>กรอก <b class="ui">สถานที่</b> กับ <b class="ui">เมื่อเวลา</b> เช่น <code>โรงอาหาร</code> / <code>15:00</code></p></li>
-      <li><p>กรอก <b class="ui">ช่องทางติดต่อ</b> — เบอร์โทร หรือไอดีไลน์ ให้คนที่เจอติดต่อกลับได้</p></li>
-      <li><p>อยากใส่รูปก็กด <b class="ui">แนบรูปภาพ (ไม่บังคับ)</b></p><p class="why">มีรูปคนตามเจอง่ายกว่ากันเยอะ โดยเฉพาะของที่หน้าตาคล้ายกัน เช่น กระบอกน้ำ หูฟัง</p></li>
-      <li><p>กด <b class="ui">แจ้งข้อมูล</b> — รายการจะไปโผล่บนกระดานด้านล่างทันที ทุกคนที่เปิดเว็บเห็นเลย</p></li>
-    </ol>
+    <footer class="ft">
+      <span>ULTRA 4X · ม.4/8 โรงเรียนสรรพวิทยาคม</span>
+      <span><a href="https://jakapongdiwaa-hash.github.io/PREMIUM-WEB-Ultra4x/">jakapongdiwaa-hash.github.io/PREMIUM-WEB-Ultra4x</a></span>
+    </footer>
+  </div>
+</section>
 
-    <h3>ดูของที่คนอื่นแจ้งไว้</h3>
-    <ul class="plain">
-      <li>เลื่อนลงมาที่หัวข้อ <b class="ui">ทุกรายการ</b></li>
-      <li>กรองด้วยปุ่ม <b class="ui">ทั้งหมด</b> / <b class="ui">ของหาย</b> / <b class="ui">เจอของ</b></li>
-      <li>ติ๊ก <b class="ui">ซ่อนรายการที่พบเจ้าของแล้ว</b> ให้เหลือแต่เรื่องที่ยังไม่จบ</li>
-      <li><strong>แตะที่การ์ด</strong> เปิดหน้ารายละเอียดเต็มจอ เห็นรูปใหญ่ ชื่อคนแจ้ง และช่องทางติดต่อ กด <b class="ui">ดูรายการต่อไป →</b> ไล่ดูทีละชิ้นได้เลย ปิดด้วยปุ่ม <b class="ui">✕</b> หรือปุ่ม Esc</li>
-    </ul>
-
-    <h3>พอเจอเจ้าของแล้ว</h3>
-    <ul class="plain">
-      <li>กด <b class="ui">พบเจ้าของแล้ว</b> ที่การ์ดนั้น เรื่องจะถูกทำเครื่องหมายว่าจบแล้ว แต่ยังอยู่ให้ย้อนดูได้</li>
-      <li>กดผิด กด <b class="ui">ย้อนกลับ</b> เอากลับมาได้</li>
-      <li>ปุ่ม <b class="ui">ลบ</b> คือลบถาวร <strong>กู้คืนไม่ได้</strong> ระบบจะเด้งถามยืนยันก่อนหนึ่งครั้ง</li>
-    </ul>
-
-    <div class="note">
-      <span class="label">ควรรู้</span>
-      <p>หน้านี้ไม่มีระบบล็อกอิน ใครเปิดเว็บก็โพสต์ได้และกดปุ่มพวกนี้ได้หมด — เลยไม่ควรใส่ข้อมูลส่วนตัวเกินจำเป็นลงในช่องติดต่อ</p>
-    </div>
-  </section>
-
-  <!-- ============ PAGE 2 ============ -->
-  <section class="doc" id="attendance">
-    <div class="sec-head"><span class="sec-tag">หน้า 2</span><h2>เช็คชื่อยืนยันตัวตน</h2></div>
-    <p class="sec-note">ส่งรูปวันละครั้งเพื่อยืนยันว่ามาเรียนจริง เป็นหลักฐานสำรองให้ทั้งเราและครู</p>
-
-    <div class="board" tabindex="0" role="group" aria-label="ฟีเจอร์ของหน้าเช็คชื่อ เลื่อนเมาส์หรือแตะเพื่อดูรายละเอียด">
-      <span class="board-eyebrow">ฟีเจอร์ในหน้านี้ — ชี้หรือแตะเพื่อดูสรุป</span>
-      <div class="chips">
-        <div class="chip" tabindex="0"><p>เข้าสู่ระบบ</p><span class="detail">ล็อกอินด้วยอีเมล @sappha.ac.th เท่านั้น ครั้งแรกกรอกเลขที่กับชื่อ ครั้งต่อไปเข้าตรง</span></div>
-        <div class="chip" tabindex="0"><p>ถ่ายรูปประจำวัน</p><span class="detail">กดปุ่มกล้อง เปิดแอปกล้องของเครื่อง ถ่ายเสร็จเลือกใช้รูปนี้ อัปโหลดให้อัตโนมัติ</span></div>
-        <div class="chip" tabindex="0"><p>แจ้งลา</p><span class="detail">ใช้แทนการถ่ายรูปได้ ใส่เหตุผล แนบใบลาหรือใบรับรองแพทย์เพิ่มได้</span></div>
-        <div class="chip" tabindex="0"><p>ยกเลิก / แก้ไข</p><span class="detail">ส่งผิดกดยกเลิกได้ ระบบลบของวันนี้ทิ้งแล้วกลับไปส่งใหม่</span></div>
-        <div class="chip" tabindex="0"><p>ดูย้อนหลัง</p><span class="detail">เลือกวันที่ย้อนดูได้ ของเก่าไม่หาย พอขึ้นวันใหม่ทุกคนรีเซ็ตอัตโนมัติ</span></div>
-      </div>
-    </div>
-
-    <h3>ครั้งแรกที่เข้า — ทำครั้งเดียวจบ</h3>
-    <ol class="steps">
-      <li><p>กดแท็บ <b class="ui">เช็คชื่อยืนยันตัวตน</b></p></li>
-      <li><p>กด <b class="ui">เข้าสู่ระบบด้วย Google</b> แล้วเลือก<strong>อีเมลโรงเรียน</strong>ที่ลงท้ายด้วย <code>@sappha.ac.th</code></p><p class="why">อีเมลส่วนตัวใช้ไม่ได้ ระบบจะเตะออกทันทีที่เห็นว่าโดเมนไม่ตรง</p></li>
-      <li><p>ถ้ายังไม่เคยเข้ามาก่อน จะขึ้นฟอร์มลงทะเบียน กรอก <b class="ui">เลขที่</b> กับ <b class="ui">ชื่อ-นามสกุล</b> แล้วกด <b class="ui">ลงทะเบียนเข้าห้อง</b></p><p class="why">ทำแค่ครั้งเดียว ครั้งต่อไปล็อกอินแล้วเข้าหน้าเช็คชื่อตรงเลย</p></li>
-    </ol>
-
-    <h3>เช็คชื่อประจำวัน — วันที่มาเรียน</h3>
-    <ol class="steps">
-      <li><p>กด <b class="ui">📷 ถ่ายรูปยืนยันตัวตนวันนี้</b> เว็บจะเด้งไปที่<strong>แอปกล้องของเครื่อง</strong>เลย</p><p class="why">ใช้แอปกล้องจริง สลับกล้องหน้า-หลังได้ ถ่ายไม่ชอบก็ถ่ายใหม่ได้ตามปกติ</p></li>
-      <li><p>ถ่ายเสร็จเลือก <b class="ui">ใช้รูปนี้</b> ระบบจะอัปโหลดให้เอง</p></li>
-      <li><p>แถบด้านบนจะเปลี่ยนเป็น <b class="ui">ส่งแล้ว</b> พร้อมโชว์รูปที่เพิ่งส่ง เป็นอันเสร็จ</p></li>
-    </ol>
-
-    <h3>วันที่ลา — ใช้เส้นทางนี้แทน</h3>
-    <ol class="steps">
-      <li><p>แทนที่จะถ่ายรูป ให้กดลิงก์ <b class="ui">หรือแจ้งลาวันนี้แทน</b></p></li>
-      <li><p>กรอก <b class="ui">เหตุผลที่ลา</b> เช่น <code>ป่วย</code> หรือ <code>ธุระที่บ้าน</code></p></li>
-      <li><p>มีใบลาหรือใบรับรองแพทย์ก็แนบได้ที่ <b class="ui">แนบรูป</b> — ไม่บังคับ</p></li>
-      <li><p>กด <b class="ui">ยืนยันแจ้งลา</b> สถานะจะขึ้นเป็น <b class="ui">ลา</b> พร้อมเหตุผลที่เขียนไว้</p></li>
-    </ol>
-
-    <h3>ส่งผิด อยากแก้</h3>
-    <ul class="plain">
-      <li>กด <b class="ui">ยกเลิก</b> ระบบจะลบของวันนี้ทิ้งแล้วกลับไปหน้าส่งรูปเหมือนเดิม ส่งใหม่ได้เลย</li>
-      <li>มีเด้งถามยืนยันก่อนหนึ่งครั้ง เพราะ<strong>ยกเลิกแล้วกู้รูปเดิมคืนไม่ได้</strong></li>
-    </ul>
-
-    <h3>สถานะทั้ง 4 แบบ อ่านยังไง</h3>
-    <dl class="legend">
-      <div><dt><span class="swatch" style="background:#2563EB;"></span>ส่งแล้ว</dt><dd>ส่งรูปเรียบร้อย นับว่ามาเรียน</dd></div>
-      <div><dt><span class="swatch" style="background:#06B6D4;"></span>ลา</dt><dd>แจ้งลาพร้อมเหตุผลไว้แล้ว</dd></div>
-      <div><dt><span class="swatch" style="background:#C9524A;"></span>ขาด</dt><dd>ครูกดกำกับเอง ระบบไม่ตั้งให้เอง</dd></div>
-      <div><dt><span class="swatch" style="background:#94A3B8;"></span>ยังไม่ส่ง</dt><dd>ค่าเริ่มต้นของทุกคนตอนขึ้นวันใหม่</dd></div>
-    </dl>
-  </section>
-
-  <!-- ============ ADMIN ============ -->
-  <section class="doc" id="admin">
-    <div class="sec-head"><span class="sec-tag">แอดมิน</span><h2>สำหรับครูและคนดูแลห้อง</h2></div>
-    <p class="sec-note">ปุ่มพวกนี้ซ่อนไว้ ต้องใส่รหัสก่อนถึงจะโผล่</p>
-
-    <div class="admin">
-      <h3>เปิดโหมดแอดมิน</h3>
-      <ol class="steps">
-        <li><p>เลื่อนลงไปใต้รายชื่อ กด <b class="ui">เข้าสู่โหมดแอดมิน</b> แล้วใส่รหัสผ่านที่ตั้งไว้</p></li>
-        <li><p>ปุ่มจัดการจะโผล่ขึ้นมาบนการ์ดนักเรียนทุกคน และมีกล่องเครื่องมือเพิ่มด้านล่าง</p></li>
-        <li><p>ใช้เสร็จกด <b class="ui">ออกจากโหมดแอดมิน</b> ปุ่มทั้งหมดจะซ่อนกลับ</p></li>
-      </ol>
-
-      <h3>แก้สถานะรายคน</h3>
-      <p>บนการ์ดของนักเรียนแต่ละคนจะมีปุ่ม <b class="ui">ดูรูป</b> <b class="ui">ลา</b> <b class="ui">ขาด</b> <b class="ui">ยังไม่ส่ง</b> <b class="ui">แก้ไข</b> และ <b class="ui">ลบรายชื่อ</b></p>
-
-      <h3>เพิ่มรายชื่อ</h3>
-      <p>ทีละคนใช้กล่อง <b class="ui">จัดการรายชื่อนักเรียน</b> กรอกชื่อกับอีเมลโรงเรียนจริงแล้วกด <b class="ui">เพิ่มรายชื่อ</b></p>
-      <p style="margin-top:12px;">ทั้งห้องพร้อมกันใช้กล่อง <b class="ui">นำเข้ารายชื่อทั้งห้องพร้อมกัน</b> พิมพ์บรรทัดละหนึ่งคน คั่นด้วยจุลภาค:</p>
-      <div class="fmt">เลขที่,รหัสประจำตัว,ชื่อ-นามสกุล
-
-1,33000,นายภูวิศ ไชยบุญเรือง
-2,33148,นายกรกฤต ลิ่วกุล</div>
-
-      <div class="note">
-        <span class="label">ระวังตรงนี้</span>
-        <p>การนำเข้าทั้งห้อง<strong>เดาอีเมล</strong>ให้เองเป็น <code>รหัสประจำตัว@sappha.ac.th</code> — วิธีที่ชัวร์กว่าคือปล่อยให้ทุกคนล็อกอินลงทะเบียนเอง</p>
-      </div>
-
-      <h3>ส่งออกประวัติเป็นไฟล์</h3>
-      <ol class="steps">
-        <li><p>ที่กล่อง <b class="ui">ส่งออกประวัติการเช็คชื่อ</b> เลือกเดือนที่ต้องการ</p></li>
-        <li><p>กด <b class="ui">ดาวน์โหลด CSV</b> ได้ไฟล์มาทั้งเดือน</p></li>
-        <li><p>เปิดใน Excel ได้เลย <strong>ภาษาไทยไม่เพี้ยน</strong></p></li>
-      </ol>
-    </div>
-  </section>
-
-  <!-- ============ TROUBLESHOOTING ============ -->
-  <section class="doc" id="fix">
-    <div class="sec-head"><span class="sec-tag">แก้ปัญหา</span><h2>เจอแบบนี้ทำยังไง</h2></div>
-    <div class="fix"><h4>กดเข้าสู่ระบบแล้วไม่มีอะไรเกิดขึ้น</h4><p>ส่วนใหญ่เกิดจากเปิดเว็บผ่านลิงก์ในไลน์ กดเมนูมุมขวาบนแล้วเลือก <b class="ui">เปิดในเบราว์เซอร์</b></p></div>
-    <div class="fix"><h4>ปุ่มแอดมินกดไม่ติดบนมือถือ</h4><p>สาเหตุเดียวกัน เปิดในเบราว์เซอร์จริงแล้วจะใช้ได้ปกติ</p></div>
-    <div class="fix"><h4>ชื่อตัวเองขึ้นซ้ำสองแถว</h4><p>แจ้งคนมีรหัสแอดมิน ใช้ปุ่ม <b class="ui">แก้ไข</b> หรือ <b class="ui">ลบรายชื่อ</b> แถวที่เกินทิ้ง</p></div>
-  </section>
-
-  <footer>คู่มือฉบับพรีเมียม — ตกแต่งด้วยภาพสามมิติและลูกเล่นเพิ่มเติมจากฉบับมาตรฐาน เนื้อหาขั้นตอนอ้างอิงจากปุ่มจริงในเว็บ</footer>
-</div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" onload="document.documentElement.classList.add('three-ready')" onerror="document.documentElement.classList.add('three-failed')"></script>
 <script>
 (function(){
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+"use strict";
 
-  /* hero fade + signal trail, cheap scroll listener */
-  var hero = document.getElementById('hero'), cue = document.getElementById('scrollcue');
-  var trailFill = document.getElementById('trailFill'), trailDot = document.getElementById('trailDot');
-  function onScroll(){
-    if (hero && !reduce){
-      var h = hero.offsetHeight || 1;
-      var t = Math.min(1, window.scrollY / (h * 0.7));
-      hero.style.opacity = 1 - t;
-      cue.style.opacity = String(Math.max(0, 1 - t * 2.2));
-    }
-    var doc = document.documentElement;
-    var max = doc.scrollHeight - window.innerHeight;
-    var frac = max > 0 ? Math.min(1, window.scrollY / max) : 0;
-    trailFill.setAttribute('y2', (frac * 100).toFixed(2));
-    trailDot.setAttribute('cy', (frac * 100).toFixed(2));
+var REDUCE = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+var COARSE = window.matchMedia && window.matchMedia("(pointer: coarse)").matches;
+var lerp = function(a,b,t){ return a + (b-a)*t; };
+var clamp = function(v,a,b){ return Math.min(b, Math.max(a, v)); };
+
+/* ══════════ 0. film grain (generated, so no external asset) ══════════ */
+(function(){
+  var s = 128, c = document.createElement("canvas");
+  c.width = c.height = s;
+  var x = c.getContext("2d"), img = x.createImageData(s, s), d = img.data;
+  for (var i = 0; i < d.length; i += 4){
+    var v = 226 + Math.random() * 29;
+    d[i] = d[i+1] = d[i+2] = v; d[i+3] = 255;
   }
-  window.addEventListener('scroll', onScroll, { passive:true });
+  x.putImageData(img, 0, 0);
+  document.documentElement.style.setProperty("--grain-url", "url(" + c.toDataURL() + ")");
+})();
+
+/* ══════════ 1. preloader ══════════ */
+(function(){
+  var el = document.getElementById("preload"),
+      num = document.getElementById("plNum"),
+      bar = document.getElementById("plBar");
+  if (!el) return;
+  var pct = 0, done = false;
+  function finish(){
+    if (done) return; done = true;
+    pct = 100; num.textContent = "100%"; bar.style.width = "100%";
+    setTimeout(function(){
+      el.classList.add("done");
+      document.body.classList.add("ready");
+    }, 380);
+  }
+  var t = setInterval(function(){
+    pct += Math.random() * 16 + 5;
+    if (pct >= 96){ pct = 96; clearInterval(t); }
+    num.textContent = Math.floor(pct) + "%";
+    bar.style.width = pct + "%";
+  }, 105);
+  window.addEventListener("load", function(){ clearInterval(t); finish(); });
+  setTimeout(function(){ clearInterval(t); finish(); }, 3600);  // never trap the page
+})();
+
+/* ══════════ 2. hero aurora — hand-written WebGL2, no library ══════════ */
+(function(){
+  var cv = document.getElementById("aurora");
+  if (!cv || REDUCE) return;
+  var gl = cv.getContext("webgl2", { antialias:false, alpha:true, premultipliedAlpha:false });
+  if (!gl) { cv.style.display = "none"; return; }
+
+  var VS = "#version 300 es\n" +
+    "in vec2 p; void main(){ gl_Position = vec4(p, 0.0, 1.0); }";
+
+  var FS = "#version 300 es\n" +
+    "precision highp float;\n" +
+    "uniform vec2 uRes; uniform float uT; uniform vec2 uM;\n" +
+    "out vec4 outColor;\n" +
+    "float hash(vec2 p){ return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123); }\n" +
+    "float noise(vec2 p){\n" +
+    "  vec2 i = floor(p), f = fract(p);\n" +
+    "  vec2 u = f * f * (3.0 - 2.0 * f);\n" +
+    "  return mix(mix(hash(i), hash(i + vec2(1,0)), u.x),\n" +
+    "             mix(hash(i + vec2(0,1)), hash(i + vec2(1,1)), u.x), u.y);\n" +
+    "}\n" +
+    "float fbm(vec2 p){\n" +
+    "  float v = 0.0, a = 0.5;\n" +
+    "  for(int i = 0; i < 5; i++){ v += a * noise(p); p *= 2.02; a *= 0.5; }\n" +
+    "  return v;\n" +
+    "}\n" +
+    "void main(){\n" +
+    "  vec2 uv = gl_FragCoord.xy / uRes;\n" +
+    "  vec2 q = uv; q.x *= uRes.x / uRes.y;\n" +
+    "  float t = uT * 0.045;\n" +
+    "  vec2 drift = vec2(fbm(q * 1.7 + t), fbm(q * 1.7 - t + 4.3));\n" +
+    "  float band = fbm(q * 2.4 + drift * 1.9 + vec2(0.0, t * 1.6));\n" +
+    "  float band2 = fbm(q * 3.6 - drift * 1.2 + vec2(t * 1.1, 0.0));\n" +
+    "  vec2 mp = uM / uRes; mp.x *= uRes.x / uRes.y;\n" +
+    "  float halo = 1.0 - smoothstep(0.0, 0.55, distance(q, mp));\n" +
+    "  vec3 base  = vec3(0.949, 0.969, 1.0);\n" +
+    "  vec3 cyan  = vec3(0.235, 0.776, 0.882);\n" +
+    "  vec3 col = base;\n" +
+    "  col = mix(col, cyan, smoothstep(0.44, 0.92, band) * 0.30);\n" +
+    "  col = mix(col, vec3(0.267, 0.451, 0.925), smoothstep(0.50, 1.0, band2) * 0.24);\n" +
+    "  col = mix(col, vec3(0.62, 0.90, 0.98), halo * 0.22);\n" +
+    "  float vig = 1.0 - smoothstep(0.42, 1.08, distance(uv, vec2(0.5)));\n" +
+    "  col = mix(base, col, 0.35 + 0.65 * vig);\n" +
+    "  outColor = vec4(col, 1.0);\n" +
+    "}";
+
+  function sh(type, src){
+    var s = gl.createShader(type);
+    gl.shaderSource(s, src); gl.compileShader(s);
+    if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)){
+      console.error("shader:", gl.getShaderInfoLog(s)); return null;
+    }
+    return s;
+  }
+  var vs = sh(gl.VERTEX_SHADER, VS), fs = sh(gl.FRAGMENT_SHADER, FS);
+  if (!vs || !fs){ cv.style.display = "none"; return; }
+  var prog = gl.createProgram();
+  gl.attachShader(prog, vs); gl.attachShader(prog, fs); gl.linkProgram(prog);
+  if (!gl.getProgramParameter(prog, gl.LINK_STATUS)){
+    console.error("link:", gl.getProgramInfoLog(prog)); cv.style.display = "none"; return;
+  }
+  gl.useProgram(prog);
+
+  var buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 3,-1, -1,3]), gl.STATIC_DRAW);
+  var loc = gl.getAttribLocation(prog, "p");
+  gl.enableVertexAttribArray(loc);
+  gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+
+  var uRes = gl.getUniformLocation(prog, "uRes"),
+      uT   = gl.getUniformLocation(prog, "uT"),
+      uM   = gl.getUniformLocation(prog, "uM");
+
+  var mx = 0, my = 0, tx = 0, ty = 0, alive = true;
+  function size(){
+    var dpr = Math.min(window.devicePixelRatio || 1, 1.75);
+    var w = cv.clientWidth, h = cv.clientHeight;
+    if (!w || !h) return;
+    cv.width = Math.floor(w * dpr); cv.height = Math.floor(h * dpr);
+    gl.viewport(0, 0, cv.width, cv.height);
+    mx = cv.width * 0.5; my = cv.height * 0.55;
+  }
+  size();
+  window.addEventListener("resize", size);
+  window.addEventListener("pointermove", function(e){
+    var r = cv.getBoundingClientRect();
+    var dpr = cv.width / (r.width || 1);
+    tx = (e.clientX - r.left) * dpr;
+    ty = (r.height - (e.clientY - r.top)) * dpr;
+  }, { passive:true });
+
+  new IntersectionObserver(function(en){ alive = en[0].isIntersecting; })
+    .observe(cv);
+
+  var t0 = performance.now();
+  (function frame(){
+    requestAnimationFrame(frame);
+    if (!alive || document.hidden) return;
+    mx = lerp(mx, tx || mx, 0.05); my = lerp(my, ty || my, 0.05);
+    gl.uniform2f(uRes, cv.width, cv.height);
+    gl.uniform2f(uM, mx, my);
+    gl.uniform1f(uT, (performance.now() - t0) / 1000);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
+  })();
+})();
+
+/* ══════════ 3. custom cursor + magnetic buttons ══════════ */
+(function(){
+  if (COARSE || REDUCE) return;
+  var dot = document.getElementById("curDot"), ring = document.getElementById("curRing");
+  if (!dot || !ring) return;
+  var x = innerWidth/2, y = innerHeight/2, rx = x, ry = y;
+  document.addEventListener("pointermove", function(e){
+    x = e.clientX; y = e.clientY;
+    document.body.classList.add("cursor-on");
+  }, { passive:true });
+  document.addEventListener("pointerleave", function(){ document.body.classList.remove("cursor-on"); });
+
+  (function loop(){
+    requestAnimationFrame(loop);
+    rx = lerp(rx, x, 0.17); ry = lerp(ry, y, 0.17);
+    dot.style.transform  = "translate(" + x + "px," + y + "px)";
+    ring.style.transform = "translate(" + rx + "px," + ry + "px)";
+  })();
+
+  var HOT = "a, button, .card, .stat, .stage, .ba, [data-magnet]";
+  document.addEventListener("pointerover", function(e){
+    if (e.target.closest && e.target.closest(HOT)) document.body.classList.add("cursor-hot");
+  });
+  document.addEventListener("pointerout", function(e){
+    if (e.target.closest && e.target.closest(HOT)) document.body.classList.remove("cursor-hot");
+  });
+
+  // magnetic pull
+  Array.prototype.forEach.call(document.querySelectorAll("[data-magnet]"), function(el){
+    el.addEventListener("pointermove", function(e){
+      var r = el.getBoundingClientRect();
+      var dx = (e.clientX - (r.left + r.width/2)) * 0.28;
+      var dy = (e.clientY - (r.top + r.height/2)) * 0.34;
+      el.style.transform = "translate(" + dx + "px," + dy + "px)";
+    });
+    el.addEventListener("pointerleave", function(){ el.style.transform = ""; });
+  });
+})();
+
+/* ══════════ 4. scroll progress + sticky bar + clock ══════════ */
+(function(){
+  var bar = document.getElementById("progress"), top = document.getElementById("topbar");
+  function onScroll(){
+    var h = document.documentElement.scrollHeight - innerHeight;
+    var p = h > 0 ? clamp(scrollY / h, 0, 1) : 0;
+    if (bar) bar.style.transform = "scaleX(" + p + ")";
+    if (top) top.classList.toggle("solid", scrollY > 40);
+  }
+  addEventListener("scroll", onScroll, { passive:true });
+  addEventListener("resize", onScroll);
   onScroll();
 
-  /* feature boards + jump pills: keyboard parity (hover already handled in CSS) */
-  var coarse = window.matchMedia('(pointer: coarse)').matches;
-  Array.prototype.forEach.call(document.querySelectorAll('.board'), function(board){
-    var chips = board.querySelectorAll('.chip');
-    function clearZoom(){ Array.prototype.forEach.call(chips, function(c){ c.classList.remove('is-zoom'); }); }
-    if (coarse){
-      board.addEventListener('click', function(e){
-        var chip = e.target.closest ? e.target.closest('.chip') : null;
-        if (!board.classList.contains('is-open')){ board.classList.add('is-open'); return; }
-        if (chip){ var on = chip.classList.contains('is-zoom'); clearZoom(); if (!on) chip.classList.add('is-zoom'); }
-      });
-      document.addEventListener('click', function(e){ if (!board.contains(e.target)){ board.classList.remove('is-open'); clearZoom(); } });
-    }
-    Array.prototype.forEach.call(chips, function(chip){
-      chip.addEventListener('keydown', function(e){
-        if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); var on = chip.classList.contains('is-zoom'); clearZoom(); if (!on) chip.classList.add('is-zoom'); }
-      });
+  var clk = document.getElementById("clock");
+  if (clk) (function tick(){
+    var d = new Date(), z = function(n){ return n < 10 ? "0" + n : "" + n; };
+    clk.textContent = z(d.getHours()) + ":" + z(d.getMinutes()) + ":" + z(d.getSeconds());
+    setTimeout(tick, 1000);
+  })();
+})();
+
+/* ══════════ 5. reveal on scroll ══════════ */
+(function(){
+  var els = document.querySelectorAll("[data-rv]");
+  if (!els.length) return;
+  if (REDUCE || !("IntersectionObserver" in window)){
+    Array.prototype.forEach.call(els, function(e){ e.classList.add("in"); });
+    return;
+  }
+  var io = new IntersectionObserver(function(ens){
+    ens.forEach(function(en){
+      if (en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); }
     });
+  }, { threshold:0.14, rootMargin:"0px 0px -8% 0px" });
+  Array.prototype.forEach.call(els, function(e){ io.observe(e); });
+})();
+
+/* ══════════ 6. text scramble on headings ══════════ */
+(function(){
+  var els = document.querySelectorAll("[data-scramble]");
+  if (!els.length || REDUCE || !("IntersectionObserver" in window)) return;
+
+  /* Thai letters carry their vowels and tone marks as separate code points,
+     so splitting on code points tears a syllable apart and the heading comes
+     back missing its marks. Segment by grapheme cluster instead, and swap in
+     whole Thai consonants so it reads as Thai decoding rather than mojibake. */
+  var POOL = Array.from("กขคงจฉชญฎฐณดตถทธนบปผฝพฟภมยรลวศษสหฬอฮ");
+  var seg = (typeof Intl !== "undefined" && Intl.Segmenter)
+    ? new Intl.Segmenter("th", { granularity:"grapheme" }) : null;
+
+  function clusters(str){
+    if (seg) return Array.from(seg.segment(str), function(s){ return s.segment; });
+    // fallback: glue combining marks (U+0E31..U+0E3A, U+0E47..U+0E4E) onto the base
+    var out = [];
+    Array.from(str).forEach(function(ch){
+      var c = ch.codePointAt(0);
+      var combining = (c >= 0x0E31 && c <= 0x0E3A) || (c >= 0x0E47 && c <= 0x0E4E);
+      if (combining && out.length) out[out.length - 1] += ch;
+      else out.push(ch);
+    });
+    return out;
+  }
+
+  function run(el){
+    var target = el.getAttribute("data-scramble") || el.textContent;
+    var units = clusters(target);
+    var start = performance.now(), DUR = 900;
+    // each cluster locks in at its own moment, left to right
+    var locks = units.map(function(_, i){
+      return DUR * (0.25 + 0.62 * (i / Math.max(1, units.length - 1)));
+    });
+    (function step(now){
+      var t = now - start, out = "", busy = false;
+      for (var i = 0; i < units.length; i++){
+        var u = units[i];
+        if (u.trim() === "" || t >= locks[i]) { out += u; }
+        else { busy = true; out += POOL[(Math.random() * POOL.length) | 0]; }
+      }
+      el.textContent = out;
+      if (busy && t < DUR + 120) requestAnimationFrame(step);
+      else el.textContent = target;
+    })(start);
+  }
+
+  var io = new IntersectionObserver(function(ens){
+    ens.forEach(function(en){
+      if (en.isIntersecting){ run(en.target); io.unobserve(en.target); }
+    });
+  }, { threshold:0.55 });
+  Array.prototype.forEach.call(els, function(e){ io.observe(e); });
+})();
+
+/* ══════════ 7. counters ══════════ */
+(function(){
+  var els = document.querySelectorAll("[data-count]");
+  if (!els.length) return;
+  function run(el){
+    var to = parseFloat(el.getAttribute("data-count")) || 0;
+    var suffix = el.querySelector("em");
+    var dur = 1500, t0 = performance.now();
+    (function step(now){
+      var k = clamp((now - t0) / dur, 0, 1);
+      var e = 1 - Math.pow(1 - k, 3);   // easeOutCubic
+      el.firstChild.nodeValue = String(Math.round(to * e));
+      if (k < 1) requestAnimationFrame(step);
+      else el.firstChild.nodeValue = String(to);
+    })(t0);
+    if (suffix) { /* suffix element stays put */ }
+  }
+  // make sure there is a text node first, before any <em>
+  Array.prototype.forEach.call(els, function(el){
+    if (!el.firstChild || el.firstChild.nodeType !== 3) el.insertBefore(document.createTextNode("0"), el.firstChild);
   });
+  if (REDUCE || !("IntersectionObserver" in window)){
+    Array.prototype.forEach.call(els, function(el){ el.firstChild.nodeValue = el.getAttribute("data-count"); });
+    return;
+  }
+  var io = new IntersectionObserver(function(ens){
+    ens.forEach(function(en){
+      if (en.isIntersecting){ run(en.target); io.unobserve(en.target); }
+    });
+  }, { threshold:0.6 });
+  Array.prototype.forEach.call(els, function(e){ io.observe(e); });
+})();
 
-  /* ---------------- hologram manual ---------------- */
-  var stage = document.getElementById('stage'), canvas = document.getElementById('rig');
-  var fallback = document.getElementById('fallback');
-  var listEl = document.getElementById('partList');
-  if (typeof THREE === 'undefined'){ fallback.style.display = 'flex'; return; }
+/* ══════════ 8. marquee content ══════════ */
+(function(){
+  var t = document.getElementById("mqTrack");
+  if (!t) return;
+  var words = ["PREMIUM WEB DESIGN","โฮโลแกรมสามมิติ","WEBGL SHADER","เช็คชื่อด้วยรูปถ่าย",
+               "กระดานของหาย","CSS 3D TRANSFORM","ม.4/8 สรรพวิทยาคม","รับทำเว็บไซต์"];
+  var half = words.map(function(w){ return "<span>" + w + "</span>"; }).join("");
+  t.innerHTML = half + half;   // duplicated so the -50% loop is seamless
+})();
 
-  var coarse3d = window.matchMedia('(pointer: coarse)').matches;
-  var renderer;
-  try { renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true }); }
-  catch (e) { fallback.style.display = 'flex'; return; }
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-  var scene = new THREE.Scene();
-  var camera = new THREE.PerspectiveCamera(36, 1.6, 0.1, 100);
-  camera.position.set(0, 3.1, 8.4);
-  camera.lookAt(0, 1.0, 0);
-
-  scene.add(new THREE.HemisphereLight(0xdcecff, 0xf7fbff, 0.95));
-  var key = new THREE.DirectionalLight(0xffffff, 0.75); key.position.set(3, 8, 6); scene.add(key);
-
-  var world = new THREE.Group(); scene.add(world);
+/* ══════════ 9. hologram manual (CSS 3D — real perspective, real text) ══════════ */
+(function(){
+  var stage = document.getElementById("stage"),
+      deck  = document.getElementById("deck"),
+      list  = document.getElementById("deckList");
+  if (!stage || !deck || !list) return;
 
   var STEPS = [
-    { t:'เปิดเว็บ',           l:['เลือกแท็บที่ต้องการใช้งาน','กระดานของหาย หรือ เช็คชื่อ'] },
-    { t:'แจ้งของหาย',         l:['กรอกฟอร์ม แนบรูปได้','กดแจ้งข้อมูล ขึ้นกระดานทันที'] },
-    { t:'เข้าสู่ระบบ',         l:['ใช้อีเมล @sappha.ac.th','ครั้งแรกกรอกเลขที่และชื่อ'] },
-    { t:'ถ่ายรูปเช็คชื่อ',      l:['กดปุ่มกล้องของเครื่อง','ส่งแล้วขึ้นสถานะทันที'] },
-    { t:'แจ้งลา / ย้อนหลัง',   l:['ลาได้พร้อมเขียนเหตุผล','เลือกวันที่ดูย้อนหลังได้'] }
+    { t:"เปิดเว็บ",          s:"เลือกแท็บที่ต้องการ",
+      l:["เลือกแท็บที่จะใช้","สลับไปมาได้ตลอด"] },
+    { t:"แจ้งของหาย",        s:"กรอกฟอร์ม แนบรูปได้",
+      l:["ไม่ต้องล็อกอิน","กดแจ้ง ขึ้นทันที"] },
+    { t:"เข้าสู่ระบบ",        s:"เฉพาะอีเมลโรงเรียน",
+      l:["ใช้อีเมลโรงเรียน","ครั้งแรกกรอกเลขที่"] },
+    { t:"ถ่ายรูปเช็คชื่อ",     s:"ยืนยันตัวตนประจำวัน",
+      l:["กล้องเปิดในหน้าเว็บ","ส่งแล้วขึ้นสถานะ"] },
+    { t:"ลา / ดูย้อนหลัง",    s:"ยืดหยุ่นได้ทุกวัน",
+      l:["แจ้งลาพร้อมเหตุผล","เลือกวันย้อนดูได้"] }
   ];
 
-  /* each sheet is a canvas: deep blue at the base fading up to light cyan */
-  function sheetTexture(step){
-    var c = document.createElement('canvas');
-    c.width = 620; c.height = 372;
-    var x = c.getContext('2d');
-    var g = x.createLinearGradient(0, c.height, 0, 0);
-    g.addColorStop(0,    'rgba(7,28,92,0.95)');
-    g.addColorStop(0.45, 'rgba(21,82,190,0.88)');
-    g.addColorStop(0.78, 'rgba(52,150,226,0.74)');
-    g.addColorStop(1,    'rgba(128,224,248,0.60)');
-    x.fillStyle = g; x.fillRect(0, 0, c.width, c.height);
-
-    x.fillStyle = 'rgba(196,244,255,0.055)';
-    for (var s = 0; s < c.height; s += 6) x.fillRect(0, s, c.width, 2);
-
-    x.strokeStyle = 'rgba(180,240,255,0.9)'; x.lineWidth = 3;
-    x.strokeRect(3, 3, c.width - 6, c.height - 6);
-    x.strokeStyle = 'rgba(180,240,255,0.3)'; x.lineWidth = 1;
-    x.strokeRect(18, 18, c.width - 36, c.height - 36);
-
-    x.fillStyle = 'rgba(160,235,255,0.95)';
-    x.fillRect(44, 58, 46, 3);
-
-    x.fillStyle = '#F4FCFF';
-    x.font = '700 48px "Chakra Petch","IBM Plex Sans Thai",sans-serif';
-    x.fillText(step.t, 44, 132);
-
-    x.fillStyle = 'rgba(224,246,255,0.92)';
-    x.font = '400 28px "IBM Plex Sans Thai",sans-serif';
-    step.l.forEach(function(line, i){ x.fillText(line, 44, 206 + i * 46); });
-
-    var tex = new THREE.CanvasTexture(c);
-    tex.anisotropy = 4;
-    return tex;
-  }
-
-  /* the closed manual, lying flat */
-  var coverMat = new THREE.MeshStandardMaterial({ color:0x14337F, roughness:0.34, metalness:0.25 });
-  var cover = new THREE.Mesh(new THREE.BoxGeometry(2.45, 0.2, 1.62), coverMat);
-  cover.position.y = 0.1; world.add(cover);
-  var edge = new THREE.Mesh(new THREE.BoxGeometry(2.5, 0.03, 1.67),
-    new THREE.MeshBasicMaterial({ color:0x63DAF5, transparent:true, opacity:0.85 }));
-  edge.position.y = 0.205; world.add(edge);
-  var spine = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.23, 1.62),
-    new THREE.MeshStandardMaterial({ color:0x0A2260, roughness:0.4 }));
-  spine.position.set(-1.2, 0.1, 0); world.add(spine);
-
-  /* the projector glow that appears while it is open */
-  var glowMat = new THREE.MeshBasicMaterial({ color:0x5FD4F0, transparent:true, opacity:0, side:THREE.DoubleSide, depthWrite:false });
-  var glow = new THREE.Mesh(new THREE.CircleGeometry(1.35, 40), glowMat);
-  glow.rotation.x = -Math.PI/2; glow.position.y = 0.215; world.add(glow);
-
-  /* the sheets that fan up out of it */
+  var N = STEPS.length, MID = (N - 1) / 2;
   var sheets = [];
-  var PW = 2.05, PH = 1.23;
-  STEPS.forEach(function(step, i){
-    var mat = new THREE.MeshBasicMaterial({ map:sheetTexture(step), transparent:true, opacity:0, side:THREE.DoubleSide, depthWrite:false });
-    var m = new THREE.Mesh(new THREE.PlaneGeometry(PW, PH), mat);
-    m.userData.partIndex = i;
-    var a = (i - 2) * 0.44;
-    sheets.push({
-      m:m, mat:mat,
-      cPos:new THREE.Vector3(0, 0.21 + i*0.008, 0), cRotX:-Math.PI/2, cRotY:0, cSc:0.62,
-      oPos:new THREE.Vector3(Math.sin(a)*3.2, 1.72 + Math.cos(a)*0.38, -Math.abs(Math.sin(a))*1.25),
-      oRotX:-0.09, oRotY:-a*0.62, oSc:1
-    });
-    world.add(m);
-  });
+  var SPREAD = 0.40;                          // fan angle step, radians
 
-  /* rebuild the sheets once the Thai webfonts have actually loaded */
-  if (document.fonts && document.fonts.ready){
-    document.fonts.ready.then(function(){
-      sheets.forEach(function(p, i){
-        if (p.mat.map) p.mat.map.dispose();
-        p.mat.map = sheetTexture(STEPS[i]); p.mat.needsUpdate = true;
+  /* The fan radius has to come from the stage width, or the sheets pile on
+     top of each other and the text underneath becomes unreadable. Each sheet
+     is 246px wide (200 under 820px), so neighbours need ~210px between them
+     to overlap like a hand of cards instead of a stack. */
+  /* Spacing the sheets by sin() squeezes the outer pair closer than the inner
+     pair (sin is flat near its peak), so the last card ends up underneath its
+     neighbour. Space them evenly in X instead and keep the arc in Z only, then
+     scale the whole fan down if the stage is too narrow to hold it. */
+  /* A five-card fan needs roughly 1100px. Squeezing it into a phone shrinks
+     every card until the text is unreadable, so narrow screens get a stacked
+     deck instead: the chosen step sits front and centre at full size and the
+     rest tuck in behind it. */
+  var narrow = false, cur = 0;
+
+  function geometry(){
+    var w = stage.clientWidth || 900;
+    var sheetW = w < 820 ? 178 : 212;               // matches the CSS widths
+    var want = sheetW * 1.06;                       // even gap, clears the card
+    var needed = want * (N - 1) + sheetW;
+    var scale = Math.min(1, (w * 0.95) / needed);
+    return { gap: want * scale, scale: scale, w: w };
+  }
+
+  function layout(){
+    var g = geometry();
+    narrow = g.w < 700;
+
+    sheets.forEach(function(el){
+      if (narrow){
+        var sw = Math.min(290, g.w - 54);
+        el.style.width = sw + "px";
+        el.style.marginLeft = (-sw / 2) + "px";
+        el.style.height = "176px";
+        el.style.marginTop = "-88px";
+      } else {
+        el.style.width = el.style.marginLeft = el.style.height = el.style.marginTop = "";
+      }
+    });
+
+    if (narrow){
+      sheets.forEach(function(el, i){
+        el.dataset.scale = "1";
+        el.dataset.open = "";        // computed per-frame in apply()
       });
-    });
+    } else {
+      sheets.forEach(function(el, i){
+        var k = i - MID;
+        var a = k * SPREAD;
+        el.dataset.open =
+          "translate3d(" + (k * g.gap).toFixed(1) + "px," +
+          (46 - Math.cos(a) * 22).toFixed(1) + "px," +
+          (52 + Math.cos(a) * 54).toFixed(1) + "px) " +
+          "rotateY(" + (-a * 30).toFixed(1) + "deg) " +
+          "rotateZ(" + (a * 4).toFixed(1) + "deg) scale(" + g.scale.toFixed(3) + ")";
+        el.dataset.scale = g.scale.toFixed(3);
+      });
+    }
+    apply();
   }
 
-  var rows = Array.prototype.slice.call(listEl.querySelectorAll('button'));
-  var open = 0, openTarget = reduce ? 1 : 0, focus = -1, visible = true, sway = 0;
-  var ray = new THREE.Raycaster(), ndc = new THREE.Vector2(-9,-9);
-
-  function setFocus(i){
-    if (focus === i) return;
-    focus = i;
-    rows.forEach(function(r, n){ r.classList.toggle('hot', n === i); });
-  }
-  function setOpen(on){
-    openTarget = on ? 1 : 0;
-    stage.classList.toggle('is-open', on);
-    if (!on) setFocus(-1);
-  }
-  function pick(){
-    if (openTarget < 1) return;
-    ray.setFromCamera(ndc, camera);
-    var hits = ray.intersectObjects(sheets.map(function(p){ return p.m; }), false);
-    setFocus(hits.length ? hits[0].object.userData.partIndex : -1);
-  }
-  function resize(){
-    var w = stage.clientWidth, h = stage.clientHeight; if (!w || !h) return;
-    renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix();
+  function stackTransform(i){
+    var d = i - cur;
+    var ad = Math.abs(d);
+    return "translate3d(" + (d * 17).toFixed(1) + "px," +
+           (34 + ad * 11).toFixed(1) + "px," +
+           (70 - ad * 66).toFixed(1) + "px) " +
+           "rotateY(" + (-d * 7).toFixed(1) + "deg) rotateZ(" + (d * 1.6).toFixed(1) + "deg) " +
+           "scale(" + (1 - ad * 0.055).toFixed(3) + ")";
   }
 
-  function frame(){
-    requestAnimationFrame(frame); if (!visible) return;
-    open += (openTarget - open) * 0.085;
+  STEPS.forEach(function(st, i){
+    var a = (i - MID) * SPREAD;               // fan angle, radians
+    var el = document.createElement("div");
+    el.className = "sheet";
+    el.setAttribute("data-i", i);
+    el.innerHTML =
+      '<span class="sh-no">STEP 0' + (i + 1) + '</span>' +
+      '<h4></h4>' +
+      st.l.map(function(){ return "<p></p>"; }).join("") +
+      '<span class="bar"></span>';
+    el.querySelector("h4").textContent = st.t;
+    var ps = el.querySelectorAll("p");
+    st.l.forEach(function(line, k){ if (ps[k]) ps[k].textContent = line; });
 
-    /* a slow sway only while it is shut — nothing spins once the sheets are up */
-    if (!reduce) sway += 0.006;
-    world.rotation.y = (1 - open) * Math.sin(sway) * 0.14;
+    var shut = "translate3d(0px,0px," + (i * 2) + "px) rotateY(0deg) rotateZ(0deg) scale(.55)";
+    el.dataset.shut = shut;
+    el.style.transform = shut;
+    el.style.transitionDelay = (i * 60) + "ms";
+    deck.appendChild(el);
+    sheets.push(el);
+  });
 
-    glowMat.opacity = open * 0.22;
-    glow.scale.setScalar(0.8 + open * 0.4);
-    edge.material.opacity = 0.4 + open * 0.5;
+  var isOpen = false, focus = -1;
 
-    sheets.forEach(function(p, i){
+  function apply(){
+    sheets.forEach(function(el, i){
+      if (narrow){
+        var front = (i === cur);
+        el.style.transform = isOpen ? stackTransform(i) : el.dataset.shut;
+        el.style.zIndex = String(N - Math.abs(i - cur));
+        el.classList.toggle("hot", isOpen && front);
+        el.classList.toggle("dim", isOpen && !front);
+        el.style.opacity = isOpen ? (Math.abs(i - cur) > 2 ? "0" : "") : "";
+        return;
+      }
+      el.style.zIndex = ""; el.style.opacity = "";
       var hot = (i === focus);
-      p.m.position.lerpVectors(p.cPos, p.oPos, open);
-      if (hot) p.m.position.z += 0.55 * open;
-      p.m.rotation.x = p.cRotX + (p.oRotX - p.cRotX) * open;
-      p.m.rotation.y = p.cRotY + (p.oRotY - p.cRotY) * open;
-      var want = (p.cSc + (p.oSc - p.cSc) * open) * (1 + (hot ? 0.13 : 0) * open);
-      p.m.scale.x += (want - p.m.scale.x) * 0.14;
-      p.m.scale.y = p.m.scale.x;
-      var wantO = open * ((focus === -1 || hot) ? 1 : 0.3);
-      p.mat.opacity += (wantO - p.mat.opacity) * 0.14;
+      var base = isOpen ? el.dataset.open : el.dataset.shut;
+      var s = parseFloat(el.dataset.scale || "1");
+      el.style.transform = isOpen && hot
+        ? base.replace("scale(" + s.toFixed(3) + ")", "scale(" + (s * 1.1).toFixed(3) + ")") + " translateZ(46px)"
+        : base;
+      el.classList.toggle("hot", isOpen && hot);
+      el.classList.toggle("dim", isOpen && focus !== -1 && !hot);
     });
-
-    renderer.render(scene, camera);
+    Array.prototype.forEach.call(list.children, function(b, i){
+      b.classList.toggle("hot", isOpen && (narrow ? i === cur : i === focus));
+    });
+    var step = document.getElementById("stageStep");
+    if (step) step.textContent = narrow ? (cur + 1) + " / " + N + " · แตะเพื่อดูขั้นถัดไป" : "";
   }
 
-  if (!coarse3d){
-    stage.addEventListener('pointerenter', function(){ setOpen(true); });
-    stage.addEventListener('pointerleave', function(){ setOpen(false); ndc.set(-9,-9); });
-    stage.addEventListener('pointermove', function(e){
-      var b = stage.getBoundingClientRect();
-      ndc.x = ((e.clientX - b.left) / b.width) * 2 - 1;
-      ndc.y = -((e.clientY - b.top) / b.height) * 2 + 1;
-      pick();
-    });
-  } else {
-    stage.addEventListener('click', function(e){
-      if (openTarget < 1){ setOpen(true); return; }
-      var b = stage.getBoundingClientRect();
-      ndc.x = ((e.clientX - b.left) / b.width) * 2 - 1;
-      ndc.y = -((e.clientY - b.top) / b.height) * 2 + 1;
-      pick();
-    });
-    document.addEventListener('click', function(e){ if (!stage.contains(e.target)) setOpen(false); });
+  function setOpen(v){
+    if (isOpen === v) return;
+    isOpen = v;
+    stage.classList.toggle("open", v);
+    if (!v) focus = -1;
+    apply();
   }
+  function setFocus(i){
+    if (narrow){ if (i >= 0 && i !== cur){ cur = i; apply(); } return; }
+    if (focus !== i){ focus = i; apply(); }
+  }
+  function advance(){ cur = (cur + 1) % N; apply(); }
 
-  rows.forEach(function(r){
-    var i = +r.dataset.i;
-    r.addEventListener('pointerenter', function(){ setOpen(true); setFocus(i); });
-    r.addEventListener('click', function(){
-      setOpen(true); setFocus(i);
-      stage.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block:'center' });
+  // per-sheet hover (CSS 3D keeps hit-testing correct)
+  sheets.forEach(function(el, i){
+    el.addEventListener("pointerenter", function(e){
+      if (e.pointerType === "touch" || narrow) return;
+      if (isOpen) setFocus(i);
+    });
+    el.addEventListener("pointerleave", function(e){
+      if (e.pointerType === "touch" || narrow) return;
+      if (isOpen && focus === i) setFocus(-1);
     });
   });
-  listEl.addEventListener('pointerleave', function(){ if (!coarse3d) setOpen(false); });
 
-  new IntersectionObserver(function(en){ visible = en[0].isIntersecting; }, { threshold:0 }).observe(stage);
-  window.addEventListener('resize', resize);
-  window.addEventListener('load', function(){ document.documentElement.classList.add('three-ready'); });
-  resize(); if (reduce) setOpen(true); frame();
+  /* Branching on matchMedia("pointer: coarse") misses touch laptops, and the
+     stage is focusable — so on a tap the focus handler opened it and the click
+     that followed toggled it straight back shut. Read the real pointerType and
+     ignore the focus that a pointer itself caused. */
+  var lastPointer = 0;
+  stage.addEventListener("pointerdown", function(){ lastPointer = Date.now(); });
+
+  stage.addEventListener("pointerenter", function(e){
+    if (e.pointerType === "touch") return;          // a tap must not hover-open
+    setOpen(true);
+  });
+  stage.addEventListener("pointerleave", function(e){
+    if (e.pointerType === "touch") return;
+    setOpen(false);
+  });
+  stage.addEventListener("click", function(){
+    if (narrow && isOpen){ advance(); return; }   // tap flips to the next card
+    setOpen(!isOpen);
+  });
+
+  stage.addEventListener("focus", function(){
+    if (Date.now() - lastPointer < 600) return;     // focus came from the tap
+    setOpen(true);
+  });
+  stage.addEventListener("blur", function(){ setOpen(false); });
+  stage.addEventListener("keydown", function(e){
+    if (e.key === "Enter" || e.key === " "){ e.preventDefault(); setOpen(!isOpen); }
+  });
+  // tapping anywhere else closes it again
+  document.addEventListener("click", function(e){
+    if (isOpen && !stage.contains(e.target) && !list.contains(e.target)) setOpen(false);
+  });
+
+  // side list mirrors the sheets
+  STEPS.forEach(function(st, i){
+    var b = document.createElement("button");
+    b.type = "button";
+    b.innerHTML = "<span></span><small></small>";
+    b.querySelector("span").textContent = st.t;
+    b.querySelector("small").textContent = st.s;
+    b.addEventListener("pointerenter", function(e){
+      if (e.pointerType === "touch") return;
+      setOpen(true); setFocus(i);
+    });
+    b.addEventListener("click", function(){
+      setOpen(true); setFocus(i);
+      stage.scrollIntoView({ behavior: REDUCE ? "auto" : "smooth", block:"center" });
+    });
+    list.appendChild(b);
+  });
+  list.addEventListener("pointerleave", function(){ if (!COARSE) setOpen(false); });
+
+  layout();
+  addEventListener("resize", layout);
+  if (REDUCE) setOpen(true);
 })();
-</script>
 
-<!-- ==========================================================================
-     AMBIENT DECORATIVE LAYER (CIRCUIT GLOW & FLOATING HEARTS)
-     Purely additive — no existing id/class/listener above is touched.
-     ========================================================================== -->
-<div class="ambient-circuit-canvas" aria-hidden="true">
-  <div class="ambient-circuit-line h1"><div class="ambient-circuit-pulse pha"></div></div>
-  <div class="ambient-circuit-line h2"><div class="ambient-circuit-pulse phb"></div></div>
-  <div class="ambient-circuit-line h3"><div class="ambient-circuit-pulse pha"></div></div>
-  <div class="ambient-circuit-line h4"><div class="ambient-circuit-pulse phb"></div></div>
-  <div class="ambient-circuit-line v1"><div class="ambient-circuit-pulse pva"></div></div>
-  <div class="ambient-circuit-line v2"><div class="ambient-circuit-pulse pvb"></div></div>
-  <div class="ambient-circuit-line v3"><div class="ambient-circuit-pulse pva"></div></div>
-  <div class="ambient-circuit-line v4"><div class="ambient-circuit-pulse pvb"></div></div>
-</div>
+/* ══════════ 10. spotlight on cards ══════════ */
+(function(){
+  if (COARSE) return;
+  Array.prototype.forEach.call(document.querySelectorAll(".card"), function(card){
+    var inner = card.querySelector(".card-in");
+    if (!inner) return;
+    card.addEventListener("pointermove", function(e){
+      var r = card.getBoundingClientRect();
+      inner.style.setProperty("--mx", (e.clientX - r.left) + "px");
+      inner.style.setProperty("--my", (e.clientY - r.top) + "px");
+    });
+  });
+})();
 
-<div id="ambient-hearts-layer" aria-hidden="true"></div>
+/* ══════════ 11. timeline — draw the line, light the dots ══════════ */
+(function(){
+  var tl = document.getElementById("tl"), path = document.getElementById("tlPath");
+  if (!tl || !path) return;
 
-<script>
-(() => {
-  const prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (prefersReduced) return;
+  function measure(){
+    var h = tl.offsetHeight;
+    path.setAttribute("d", "M1 0 L1 " + h);
+    var len = h || 1000;
+    path.style.setProperty("--len", len);
+    path.style.strokeDasharray = len;
+    if (!tl.classList.contains("in")) path.style.strokeDashoffset = len;
+  }
+  measure();
+  addEventListener("resize", measure);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
 
-  const container = document.getElementById("ambient-hearts-layer");
-  if (!container) return;
+  var items = tl.querySelectorAll(".tl-item");
+  if (REDUCE || !("IntersectionObserver" in window)){
+    Array.prototype.forEach.call(items, function(i){ i.classList.add("lit"); });
+    return;
+  }
+  var io = new IntersectionObserver(function(ens){
+    ens.forEach(function(en){ if (en.isIntersecting) en.target.classList.add("lit"); });
+  }, { threshold:0.5 });
+  Array.prototype.forEach.call(items, function(i){ io.observe(i); });
+})();
 
-  const HEART_PALETTE = ["💙", "🩵", "🤍", "❤️"];
-  const MAX_CONCURRENT = 45;
+/* ══════════ 12. before / after slider ══════════ */
+(function(){
+  var ba = document.getElementById("ba");
+  if (!ba) return;
+  var dragging = false;
+  function set(clientX){
+    var r = ba.getBoundingClientRect();
+    var p = clamp(((clientX - r.left) / r.width) * 100, 2, 98);
+    ba.style.setProperty("--split", p + "%");
+  }
+  ba.addEventListener("pointerdown", function(e){
+    dragging = true; ba.setPointerCapture(e.pointerId); set(e.clientX);
+  });
+  ba.addEventListener("pointermove", function(e){ if (dragging) set(e.clientX); });
+  ba.addEventListener("pointerup",  function(){ dragging = false; });
+  ba.addEventListener("pointercancel", function(){ dragging = false; });
+  // a nudge on first reveal so people notice it moves
+  if (!REDUCE && "IntersectionObserver" in window){
+    var io = new IntersectionObserver(function(ens){
+      ens.forEach(function(en){
+        if (!en.isIntersecting) return;
+        io.unobserve(en.target);
+        var t0 = performance.now();
+        (function anim(now){
+          var k = clamp((now - t0) / 1400, 0, 1);
+          var e = 1 - Math.pow(1 - k, 3);
+          ba.style.setProperty("--split", (50 + Math.sin(e * Math.PI * 2) * 17).toFixed(1) + "%");
+          if (k < 1) requestAnimationFrame(anim);
+          else ba.style.setProperty("--split", "50%");
+        })(t0);
+      });
+    }, { threshold:0.5 });
+    io.observe(ba);
+  }
+})();
 
-  function spawnHeart() {
-    if (document.hidden) return;
-    if (container.children.length >= MAX_CONCURRENT) return;
-
-    const el = document.createElement("span");
-    el.className = "ambient-heart-item";
-    el.textContent = HEART_PALETTE[Math.floor(Math.random() * HEART_PALETTE.length)];
-
-    const leftPct = (Math.random() * 92 + 4).toFixed(2);
-    const sizePx = (Math.random() * 14 + 24).toFixed(0);      // bigger: 24-38px
-    const duration = (Math.random() * 3.5 + 6.5).toFixed(2);
-    const drift = ((Math.random() - 0.5) * 50).toFixed(1);    // final net drift
-    const sway = (Math.random() * 24 + 22).toFixed(1);        // left/right tilt amplitude
-    const rot = (Math.random() * 10 + 12).toFixed(1);         // tilt angle amplitude
-
-    el.style.left = `${leftPct}vw`;
-    el.style.fontSize = `${sizePx}px`;
-    el.style.animationDuration = `${duration}s`;
-    el.style.setProperty("--drift", `${drift}px`);
-    el.style.setProperty("--sway", `${sway}px`);
-    el.style.setProperty("--rot", `${rot}deg`);
-
-    const cleanup = () => {
-      el.removeEventListener("animationend", cleanup);
-      if (el.parentNode) el.remove();
-    };
-    el.addEventListener("animationend", cleanup);
-
-    container.appendChild(el);
+/* ══════════ 13. ambient circuit lines + floating hearts ══════════ */
+(function(){
+  if (REDUCE) return;
+  var wrap = document.getElementById("ambCircuit");
+  if (wrap){
+    var H = [6,18,30,42,54,66,78,90], V = [4,17,30,43,57,70,83,96];
+    H.forEach(function(top, i){
+      var l = document.createElement("div");
+      l.className = "amb-line h"; l.style.top = top + "%";
+      var p = document.createElement("div");
+      p.className = "amb-pulse";
+      p.style.animationDelay = (-i * 0.75) + "s";
+      if (i % 2) p.style.animationDirection = "reverse";
+      l.appendChild(p); wrap.appendChild(l);
+    });
+    V.forEach(function(left, i){
+      var l = document.createElement("div");
+      l.className = "amb-line v"; l.style.left = left + "%";
+      var p = document.createElement("div");
+      p.className = "amb-pulse";
+      p.style.animationDelay = (-i * 0.85) + "s";
+      if (i % 2) p.style.animationDirection = "reverse";
+      l.appendChild(p); wrap.appendChild(l);
+    });
   }
 
-  setTimeout(spawnHeart, 400);
-  setInterval(spawnHeart, 350);
+  var box = document.getElementById("hearts");
+  if (!box) return;
+  var PALETTE = ["💙","🩵","🤍","❤️"], MAX = 85;
+  function spawn(){
+    if (document.hidden || box.children.length >= MAX) return;
+    var el = document.createElement("span");
+    el.className = "heart";
+    el.textContent = PALETTE[(Math.random() * PALETTE.length) | 0];
+    el.style.left = (Math.random() * 92 + 4).toFixed(2) + "vw";
+    el.style.fontSize = (Math.random() * 14 + 22).toFixed(0) + "px";
+    el.style.animationDuration = (Math.random() * 3.5 + 6.5).toFixed(2) + "s";
+    el.style.setProperty("--dr", ((Math.random() - 0.5) * 50).toFixed(1) + "px");
+    el.style.setProperty("--sw", (Math.random() * 24 + 22).toFixed(1) + "px");
+    el.style.setProperty("--rt", (Math.random() * 10 + 12).toFixed(1) + "deg");
+    el.addEventListener("animationend", function(){ if (el.parentNode) el.remove(); });
+    box.appendChild(el);
+  }
+  setTimeout(spawn, 300);
+  setInterval(spawn, 180);
+})();
+
 })();
 </script>
+</body>
+</html>
